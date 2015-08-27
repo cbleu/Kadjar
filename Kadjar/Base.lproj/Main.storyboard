@@ -72,7 +72,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ubL-t4-0Yg" kind="showDetail" id="lq0-lu-lIf"/>
+                                    <segue destination="Xpq-Zi-TqI" kind="showDetail" id="WAd-25-2WL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -90,6 +90,9 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
+                    <connections>
+                        <segue destination="ubL-t4-0Yg" kind="presentation" modalTransitionStyle="crossDissolve" id="Wab-Tr-Sty"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xur-t3-dNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -98,7 +101,7 @@
         <!--Scan-->
         <scene sceneID="YhC-00-41u">
             <objects>
-                <viewController title="Scan" id="Xpq-Zi-TqI" customClass="ScanViewController" sceneMemberID="viewController">
+                <viewController title="Scan" modalTransitionStyle="crossDissolve" id="Xpq-Zi-TqI" customClass="ScanViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1nj-EI-zmU"/>
                         <viewControllerLayoutGuide type="bottom" id="DeR-Pa-Sbd"/>
@@ -128,12 +131,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQ8-TU-6hE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2179" y="1131"/>
+            <point key="canvasLocation" x="2263" y="1145"/>
         </scene>
         <!--Transition-->
         <scene sceneID="Tdd-fy-s8f">
             <objects>
-                <viewController id="ubL-t4-0Yg" userLabel="Transition" customClass="MediaPlayerViewController" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="ubL-t4-0Yg" userLabel="Transition" customClass="MediaPlayerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bxJ-a5-0R1"/>
                         <viewControllerLayoutGuide type="bottom" id="A9O-DH-2bb"/>

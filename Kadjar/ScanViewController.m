@@ -10,6 +10,7 @@
 
 
 @interface ScanViewController ()
+
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
@@ -56,6 +57,8 @@
     _highlightView.layer.borderWidth = 3;
     
     [self initPrizeArray];
+    
+    [self startReading];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,6 +67,55 @@
     // Dispose of any resources that can be recreated.
 }
 
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:NO];
+//    [UIView setAnimationsEnabled:NO];
+//    
+//    // Stackoverflow #26357162 to force orientation
+//    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+//    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+//}
+//
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:NO];
+//    [UIView setAnimationsEnabled:YES];
+//}
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:[UIDevice currentDevice]];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
+- (void)orientationChanged:(NSNotification *)notification
+{
+    _iOSDevice = notification.object;
+    
+//    _videoPreviewLayer.connection.videoOrientation = [self interfaceOrientationToVideoOrientation];
+    
+    //or
+    
+//    [self setAutoVideoConnectionOrientation:YES];
+    
+}
+
+//-(BOOL)shouldAutorotate {
+//    return NO;
+//}
+
+//- (NSUInteger)supportedInterfaceOrientations {
+//    return UIInterfaceOrientationMaskPortrait;
+////    UIInterfaceOrientationMaskLandscapeLeft| UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortrait |UIInterfaceOrientationMaskPortraitUpsideDown;
+//    //or simply UIInterfaceOrientationMaskAll;
+//}
 
 #pragma mark - IBAction method implementation
 
@@ -91,83 +143,6 @@
 
 #pragma mark - Private method implementation
 
--(void)initPrizeArray
-{
-    //    _prizeArray = [NSMutableArray arrayWithCapacity: 10];
-    //
-    //    [_prizeArray insertObject:[[Prize alloc]init] atIndex:0];
-    //    [_prizeArray insertObject:@"Casquette" atIndex: 0];
-    //    [_prizeArray insertObject:@"T-shirt" atIndex: 1];
-    //    [_prizeArray insertObject:@"Stylo" atIndex: 2];
-    //    [_prizeArray insertObject:@"Porte-Clé" atIndex: 3];
-    
-    
-    NSMutableDictionary *lot01 =[NSMutableDictionary
-                                 dictionaryWithDictionary: @{
-                                                             @"name": @"Casquette",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    NSMutableDictionary *lot02 = [NSMutableDictionary
-                                  dictionaryWithDictionary:@{
-                                                             @"name": @"T-Shirt",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    NSMutableDictionary *lot03 = [NSMutableDictionary
-                                  dictionaryWithDictionary:@{
-                                                             @"name": @"Stylo",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    NSMutableDictionary *lot04 = [NSMutableDictionary
-                                  dictionaryWithDictionary:@{
-                                                             @"name": @"Porte-Clé",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    _prizeArray = [NSMutableArray arrayWithObjects:
-                   lot01, lot02, lot03, lot04, nil];
-    
-    
-    //    _prizeArray = [[NSMutableDictionary alloc] init];
-    //
-    //    [_prizeArray setObject:@"Casquette"    forKey:[NSNumber numberWithInt:5]];
-    //    [_prizeArray setObject:@"T-shirt"      forKey:[NSNumber numberWithInt:5]];
-    //    [_prizeArray setObject:@"Stylo"        forKey:[NSNumber numberWithInt:5]];
-    //    [_prizeArray setObject:@"Porte-Clé"    forKey:[NSNumber numberWithInt:5]];
-    
-}
-
--(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold
-{
-    int looseLimit = 100 - winThreshold;
-    
-    // First: Do we win something ?
-    
-    int randomVal = (arc4random_uniform(100));
-    NSLog(@"random value: %d, Loose threshold:%d", randomVal, looseLimit);
-    if (randomVal < looseLimit){
-        // We loose ;-(
-        return -1;
-    }
-    
-    // Second: As we win something, ask what ?
-    
-    int prizeIndex = arc4random_uniform((u_int32_t)(_prizeArray.count));
-    
-    int num = [[_prizeArray[prizeIndex] objectForKey:@"stock"] intValue];
-    if (num <= 0){
-        NSLog(@"Stock épuisé pour %@ (%d)", _prizeArray[prizeIndex][@"name"], prizeIndex);
-        return -1;
-    }
-    NSNumber *newNum = [NSNumber numberWithInt:(num - 1)];
-    [_prizeArray[prizeIndex] setObject:newNum forKey:@"stock"];
-    
-    //    NSInteger stock = [_prizeArray[prizeIndex][@"stock"] integerValue];
-    //    [_prizeArray[prizeIndex] setObject:[NSNumber numberWithInt:stock--] forKey:@"stock"];
-    
-    NSLog(@"random index: %d", prizeIndex);
-    
-    return prizeIndex;
-}
-
 
 - (BOOL)startReading {
     NSError *error;
@@ -177,8 +152,18 @@
     
     // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
     // as the media type parameter.
-    AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
+//    AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+
+    AVCaptureDevice *captureDevice = nil;
+    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    for(AVCaptureDevice *camera in devices) {
+        if([camera position] == AVCaptureDevicePositionFront) { // is front camera
+            captureDevice = camera;
+            break;
+        }
+    }
+
     // Get an instance of the AVCaptureDeviceInput class using the previous device object.
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
     
@@ -187,7 +172,28 @@
         NSLog(@"%@", [error localizedDescription]);
         return NO;
     }
-    
+
+//    AVCaptureConnection *videoConnection = nil;
+//    
+//    for ( AVCaptureConnection *connection in [movieFileOutput connections] )
+//    {
+//        NSLog(@"%@", connection);
+//        for ( AVCaptureInputPort *port in [connection inputPorts] )
+//        {
+//            NSLog(@"%@", port);
+//            if ( [[port mediaType] isEqual:AVMediaTypeVideo] )
+//            {
+//                videoConnection = connection;
+//            }
+//        }
+//    }
+//
+//    if ([videoConnection isVideoOrientationSupported])
+//    {
+//        AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationLandscapeLeft;
+//        [videoConnection setVideoOrientation:orientation];
+//    }
+
     // Initialize the captureSession object.
     _captureSession = [[AVCaptureSession alloc] init];
     
@@ -204,10 +210,21 @@
     // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
     
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
+    
     [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
     [_videoPreviewLayer setFrame:_viewPreview.layer.bounds];
     [_viewPreview.layer addSublayer:_videoPreviewLayer];
     
+    //    // Get the device orientation
+    //    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+    //    _videoPreviewLayer.orientation = deviceOrientation;
+    
+    AVCaptureConnection *videoConnection = _videoPreviewLayer.connection;
+    if ([videoConnection isVideoOrientationSupported])
+    {
+        [videoConnection setVideoOrientation:(AVCaptureVideoOrientation)[UIDevice currentDevice].orientation];
+    }
+
     // Start video capture.
     [_captureSession startRunning];
     
@@ -215,6 +232,8 @@
     [self.view addSubview:_highlightView];
     [self.view bringSubviewToFront:_highlightView];
     
+    _isReading = YES;
+
     return YES;
 }
 
@@ -230,6 +249,11 @@
 
 -(void)stopDetection
 {
+    // If the audio player is not nil, then play the sound effect.
+    if (_audioPlayer) {
+        [_audioPlayer play];
+    }
+    
     // Create a empty view with the color white.
     
     UIView *flashView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -270,22 +294,88 @@
                 [flashView removeFromSuperview];
                 [blackView removeFromSuperview];
                 
+                // DEBUG get the prize !
                 [self checkPrize];
+
+                // Close the scan View
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [self performSegueWithIdentifier:@"show_transition" sender:self];
+//                dispatch_async(dispatch_get_main_queue(), {performSegueWithIdentifier(@"", self)});
                 
-                //DEBUG
-                [self performSelector:@selector(startStopReading:) withObject:self afterDelay:0.2 ];
+//                dispatch_async(dispatch_get_main_queue(),{
+//                    self.performSegueWithIdentifier(mysegueIdentifier, self)
+//                });
+
             }];
         }];
     }];
     
-    // If the audio player is not nil, then play the sound effect.
-    if (_audioPlayer) {
-        [_audioPlayer play];
-    }
-    
     _isReading = NO;
     
 }
+
+-(void)initPrizeArray
+{
+    
+    NSMutableDictionary *lot01 =[NSMutableDictionary
+                                 dictionaryWithDictionary: @{
+                                                             @"name": @"Casquette",
+                                                             @"stock": [NSNumber numberWithInt:5]
+                                                             }];
+    NSMutableDictionary *lot02 = [NSMutableDictionary
+                                  dictionaryWithDictionary:@{
+                                                             @"name": @"T-Shirt",
+                                                             @"stock": [NSNumber numberWithInt:5]
+                                                             }];
+    NSMutableDictionary *lot03 = [NSMutableDictionary
+                                  dictionaryWithDictionary:@{
+                                                             @"name": @"Stylo",
+                                                             @"stock": [NSNumber numberWithInt:5]
+                                                             }];
+    NSMutableDictionary *lot04 = [NSMutableDictionary
+                                  dictionaryWithDictionary:@{
+                                                             @"name": @"Porte-Clé",
+                                                             @"stock": [NSNumber numberWithInt:5]
+                                                             }];
+    _prizeArray = [NSMutableArray arrayWithObjects:
+                   lot01, lot02, lot03, lot04, nil];
+    
+    
+}
+
+-(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold
+{
+    int looseLimit = 100 - winThreshold;
+    
+    // First: Do we win something ?
+    
+    int randomVal = (arc4random_uniform(100));
+    NSLog(@"random value: %d, Loose threshold:%d", randomVal, looseLimit);
+    if (randomVal < looseLimit){
+        // We loose ;-(
+        return -1;
+    }
+    
+    // Second: As we win something, ask what ?
+    
+    int prizeIndex = arc4random_uniform((u_int32_t)(_prizeArray.count));
+    
+    int num = [[_prizeArray[prizeIndex] objectForKey:@"stock"] intValue];
+    if (num <= 0){
+        NSLog(@"Stock épuisé pour %@ (%d)", _prizeArray[prizeIndex][@"name"], prizeIndex);
+        return -1;
+    }
+    NSNumber *newNum = [NSNumber numberWithInt:(num - 1)];
+    [_prizeArray[prizeIndex] setObject:newNum forKey:@"stock"];
+    
+    //    NSInteger stock = [_prizeArray[prizeIndex][@"stock"] integerValue];
+    //    [_prizeArray[prizeIndex] setObject:[NSNumber numberWithInt:stock--] forKey:@"stock"];
+    
+    NSLog(@"random index: %d", prizeIndex);
+    
+    return prizeIndex;
+}
+
 
 -(void)checkPrize
 {
@@ -305,7 +395,7 @@
     }
     
     // Display Prize
-    [_lblTitle performSelectorOnMainThread:@selector(setText:) withObject:resultStr waitUntilDone:NO];
+//    [_lblTitle performSelectorOnMainThread:@selector(setText:) withObject:resultStr waitUntilDone:NO];
     
 }
 

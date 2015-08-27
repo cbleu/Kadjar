@@ -208,6 +208,7 @@
     // The query string is converted to a char* object.
     [self runQuery:[query UTF8String] isQueryExecutable:NO];
     
+    NSLog(@"DB loaded: %lu records", (unsigned long)self.arrResults.count);
     // Returned the loaded results.
     return (NSArray *)self.arrResults;
 }
