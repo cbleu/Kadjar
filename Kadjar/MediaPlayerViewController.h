@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MediaPlayerViewController.h
 //  Kadjar
 //
 //  Created by Cesar Jacquet on 27/08/2015.
@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@import AVFoundation;
+@import AVKit;
 
-@interface ViewController : UIViewController
+@interface MediaPlayerViewController : UIViewController
 
 
 @end
-

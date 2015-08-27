@@ -9,11 +9,25 @@
 /* Begin PBXBuildFile section */
 		DB110EC41B8F19DF005F1298 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EC31B8F19DF005F1298 /* main.m */; };
 		DB110EC71B8F19DF005F1298 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EC61B8F19DF005F1298 /* AppDelegate.m */; };
-		DB110ECA1B8F19DF005F1298 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EC91B8F19DF005F1298 /* ViewController.m */; };
+		DB110ECA1B8F19DF005F1298 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EC91B8F19DF005F1298 /* ScanViewController.m */; };
 		DB110ECD1B8F19DF005F1298 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB110ECB1B8F19DF005F1298 /* Main.storyboard */; };
 		DB110ECF1B8F19DF005F1298 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB110ECE1B8F19DF005F1298 /* Images.xcassets */; };
 		DB110ED21B8F19DF005F1298 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB110ED01B8F19DF005F1298 /* LaunchScreen.xib */; };
 		DB110EDE1B8F19DF005F1298 /* KadjarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EDD1B8F19DF005F1298 /* KadjarTests.m */; };
+		DB110EE81B8F1A32005F1298 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB110EE71B8F1A32005F1298 /* libsqlite3.dylib */; };
+		DB110EEA1B8F1A3C005F1298 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB110EE91B8F1A3C005F1298 /* Foundation.framework */; };
+		DB110EEC1B8F1A74005F1298 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB110EEB1B8F1A74005F1298 /* UIKit.framework */; };
+		DB110EEE1B8F1A88005F1298 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB110EED1B8F1A88005F1298 /* CoreGraphics.framework */; };
+		DB110EF61B8F1AE4005F1298 /* FormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EF01B8F1AE4005F1298 /* FormViewController.m */; };
+		DB110EF71B8F1AE4005F1298 /* clientInfoDB.sql in Resources */ = {isa = PBXBuildFile; fileRef = DB110EF11B8F1AE4005F1298 /* clientInfoDB.sql */; };
+		DB110EF81B8F1AE4005F1298 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EF31B8F1AE4005F1298 /* DBManager.m */; };
+		DB110EF91B8F1AE4005F1298 /* DismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EF51B8F1AE4005F1298 /* DismissSegue.m */; };
+		DB110EFC1B8F1B34005F1298 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EFB1B8F1B34005F1298 /* StartViewController.m */; };
+		DB110F041B8F4226005F1298 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB110F031B8F4226005F1298 /* beep.mp3 */; };
+		DB110F061B8F580B005F1298 /* ECRAN3BD.mov in Resources */ = {isa = PBXBuildFile; fileRef = DB110F051B8F580B005F1298 /* ECRAN3BD.mov */; };
+		DBEE06901B8F77950086ECB5 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEE068F1B8F77950086ECB5 /* MediaPlayerViewController.m */; };
+		DBF384A21B8F5FC200E412DB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF384A11B8F5FC200E412DB /* AVFoundation.framework */; };
+		DBF384A41B8F5FCC00E412DB /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF384A31B8F5FCC00E412DB /* AVKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +46,33 @@
 		DB110EC31B8F19DF005F1298 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DB110EC51B8F19DF005F1298 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DB110EC61B8F19DF005F1298 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		DB110EC81B8F19DF005F1298 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		DB110EC91B8F19DF005F1298 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DB110EC81B8F19DF005F1298 /* ScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		DB110EC91B8F19DF005F1298 /* ScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		DB110ECC1B8F19DF005F1298 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DB110ECE1B8F19DF005F1298 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DB110ED11B8F19DF005F1298 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		DB110ED71B8F19DF005F1298 /* KadjarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KadjarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB110EDC1B8F19DF005F1298 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB110EDD1B8F19DF005F1298 /* KadjarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KadjarTests.m; sourceTree = "<group>"; };
+		DB110EE71B8F1A32005F1298 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		DB110EE91B8F1A3C005F1298 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DB110EEB1B8F1A74005F1298 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DB110EED1B8F1A88005F1298 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DB110EEF1B8F1AE4005F1298 /* FormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormViewController.h; sourceTree = "<group>"; };
+		DB110EF01B8F1AE4005F1298 /* FormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormViewController.m; sourceTree = "<group>"; };
+		DB110EF11B8F1AE4005F1298 /* clientInfoDB.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = clientInfoDB.sql; sourceTree = "<group>"; };
+		DB110EF21B8F1AE4005F1298 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		DB110EF31B8F1AE4005F1298 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		DB110EF41B8F1AE4005F1298 /* DismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissSegue.h; sourceTree = "<group>"; };
+		DB110EF51B8F1AE4005F1298 /* DismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissSegue.m; sourceTree = "<group>"; };
+		DB110EFA1B8F1B34005F1298 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		DB110EFB1B8F1B34005F1298 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
+		DB110F031B8F4226005F1298 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
+		DB110F051B8F580B005F1298 /* ECRAN3BD.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = ECRAN3BD.mov; sourceTree = "<group>"; };
+		DBEE068E1B8F77950086ECB5 /* MediaPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPlayerViewController.h; sourceTree = "<group>"; };
+		DBEE068F1B8F77950086ECB5 /* MediaPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPlayerViewController.m; sourceTree = "<group>"; };
+		DBF384A11B8F5FC200E412DB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DBF384A31B8F5FCC00E412DB /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +80,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBF384A41B8F5FCC00E412DB /* AVKit.framework in Frameworks */,
+				DBF384A21B8F5FC200E412DB /* AVFoundation.framework in Frameworks */,
+				DB110EEE1B8F1A88005F1298 /* CoreGraphics.framework in Frameworks */,
+				DB110EEC1B8F1A74005F1298 /* UIKit.framework in Frameworks */,
+				DB110EEA1B8F1A3C005F1298 /* Foundation.framework in Frameworks */,
+				DB110EE81B8F1A32005F1298 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +102,8 @@
 		DB110EB51B8F19DE005F1298 = {
 			isa = PBXGroup;
 			children = (
+				DBF384A31B8F5FCC00E412DB /* AVKit.framework */,
+				DBF384A11B8F5FC200E412DB /* AVFoundation.framework */,
 				DB110EC01B8F19DE005F1298 /* Kadjar */,
 				DB110EDA1B8F19DF005F1298 /* KadjarTests */,
 				DB110EBF1B8F19DE005F1298 /* Products */,
@@ -81,12 +122,25 @@
 		DB110EC01B8F19DE005F1298 /* Kadjar */ = {
 			isa = PBXGroup;
 			children = (
+				DB110EF11B8F1AE4005F1298 /* clientInfoDB.sql */,
+				DB110EF21B8F1AE4005F1298 /* DBManager.h */,
+				DB110EF31B8F1AE4005F1298 /* DBManager.m */,
+				DB110EF41B8F1AE4005F1298 /* DismissSegue.h */,
+				DB110EF51B8F1AE4005F1298 /* DismissSegue.m */,
 				DB110EC51B8F19DF005F1298 /* AppDelegate.h */,
 				DB110EC61B8F19DF005F1298 /* AppDelegate.m */,
-				DB110EC81B8F19DF005F1298 /* ViewController.h */,
-				DB110EC91B8F19DF005F1298 /* ViewController.m */,
+				DB110EFA1B8F1B34005F1298 /* StartViewController.h */,
+				DB110EFB1B8F1B34005F1298 /* StartViewController.m */,
+				DB110EC81B8F19DF005F1298 /* ScanViewController.h */,
+				DB110EC91B8F19DF005F1298 /* ScanViewController.m */,
+				DBEE068E1B8F77950086ECB5 /* MediaPlayerViewController.h */,
+				DBEE068F1B8F77950086ECB5 /* MediaPlayerViewController.m */,
+				DB110EEF1B8F1AE4005F1298 /* FormViewController.h */,
+				DB110EF01B8F1AE4005F1298 /* FormViewController.m */,
 				DB110ECB1B8F19DF005F1298 /* Main.storyboard */,
 				DB110ECE1B8F19DF005F1298 /* Images.xcassets */,
+				DB110F051B8F580B005F1298 /* ECRAN3BD.mov */,
+				DB110F031B8F4226005F1298 /* beep.mp3 */,
 				DB110ED01B8F19DF005F1298 /* LaunchScreen.xib */,
 				DB110EC11B8F19DE005F1298 /* Supporting Files */,
 			);
@@ -96,6 +150,10 @@
 		DB110EC11B8F19DE005F1298 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB110EED1B8F1A88005F1298 /* CoreGraphics.framework */,
+				DB110EEB1B8F1A74005F1298 /* UIKit.framework */,
+				DB110EE91B8F1A3C005F1298 /* Foundation.framework */,
+				DB110EE71B8F1A32005F1298 /* libsqlite3.dylib */,
 				DB110EC21B8F19DE005F1298 /* Info.plist */,
 				DB110EC31B8F19DF005F1298 /* main.m */,
 			);
@@ -168,6 +226,7 @@
 				TargetAttributes = {
 					DB110EBD1B8F19DE005F1298 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 7XP7M76727;
 					};
 					DB110ED61B8F19DF005F1298 = {
 						CreatedOnToolsVersion = 6.4;
@@ -200,8 +259,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB110ECD1B8F19DF005F1298 /* Main.storyboard in Resources */,
+				DB110F041B8F4226005F1298 /* beep.mp3 in Resources */,
+				DB110F061B8F580B005F1298 /* ECRAN3BD.mov in Resources */,
 				DB110ED21B8F19DF005F1298 /* LaunchScreen.xib in Resources */,
 				DB110ECF1B8F19DF005F1298 /* Images.xcassets in Resources */,
+				DB110EF71B8F1AE4005F1298 /* clientInfoDB.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,9 +281,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB110ECA1B8F19DF005F1298 /* ViewController.m in Sources */,
+				DB110ECA1B8F19DF005F1298 /* ScanViewController.m in Sources */,
+				DB110EFC1B8F1B34005F1298 /* StartViewController.m in Sources */,
 				DB110EC71B8F19DF005F1298 /* AppDelegate.m in Sources */,
+				DBEE06901B8F77950086ECB5 /* MediaPlayerViewController.m in Sources */,
+				DB110EF61B8F1AE4005F1298 /* FormViewController.m in Sources */,
 				DB110EC41B8F19DF005F1298 /* main.m in Sources */,
+				DB110EF91B8F1AE4005F1298 /* DismissSegue.m in Sources */,
+				DB110EF81B8F1AE4005F1298 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,9 +416,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Kadjar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -359,9 +429,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Kadjar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -418,6 +491,7 @@
 				DB110EE31B8F19DF005F1298 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB110EE41B8F19DF005F1298 /* Build configuration list for PBXNativeTarget "KadjarTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +500,7 @@
 				DB110EE61B8F19DF005F1298 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
