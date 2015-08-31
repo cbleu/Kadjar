@@ -8,7 +8,7 @@
 
 #import "MediaPlayerViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
-
+#import "GameViewController.h"
 
 @interface MediaPlayerViewController ()
 
@@ -79,8 +79,16 @@
     // Will be called when AVPlayer finishes playing playerItem
     NSLog(@"End media");
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier:@"segueFromTransitionToWin" sender:self];
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"segueFromScanToTransition"]) {
+        GameViewController *destViewController = segue.destinationViewController;
+        destViewController.currentGameCode = _currentGameCode;
+    }
 }
 
 

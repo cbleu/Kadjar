@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbitemStart;
 
 @property (nonatomic, strong) NSString *currentGameCode;
-@property (nonatomic, strong) NSMutableArray *prizeArray;
+//@property (nonatomic, strong) NSMutableArray *prizeArray;
 
 @property (nonatomic, strong)     UIDevice *iOSDevice;
 

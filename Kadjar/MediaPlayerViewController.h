@@ -12,5 +12,6 @@
 
 @interface MediaPlayerViewController : UIViewController
 
+@property (nonatomic, strong) NSString *currentGameCode;
 
 @end

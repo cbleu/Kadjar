@@ -7,7 +7,7 @@
 //
 
 #import "ScanViewController.h"
-
+#import "MediaPlayerViewController.h"
 
 @interface ScanViewController ()
 
@@ -26,9 +26,10 @@
 
 -(void)loadBeepSound;
 
--(void)checkPrize;
--(void)initPrizeArray;
--(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold;
+//-(void)checkPrize;
+//-(void)initPrizeArray;
+//-(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold;
+
 -(NSString*)getGameCodeFrom: (NSString*)scanCode;
 
 @end
@@ -56,7 +57,7 @@
     _highlightView.layer.borderColor = [UIColor greenColor].CGColor;
     _highlightView.layer.borderWidth = 3;
     
-    [self initPrizeArray];
+//    [self initPrizeArray];
     
     [self startReading];
 }
@@ -66,21 +67,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:NO];
-//    [UIView setAnimationsEnabled:NO];
-//    
-//    // Stackoverflow #26357162 to force orientation
-//    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-//    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-//}
-//
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:NO];
-//    [UIView setAnimationsEnabled:YES];
-//}
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -215,9 +201,9 @@
     [_videoPreviewLayer setFrame:_viewPreview.layer.bounds];
     [_viewPreview.layer addSublayer:_videoPreviewLayer];
     
-    //    // Get the device orientation
-    //    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-    //    _videoPreviewLayer.orientation = deviceOrientation;
+//        // Get the device orientation
+//        UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+//        _videoPreviewLayer.orientation = deviceOrientation;
     
     AVCaptureConnection *videoConnection = _videoPreviewLayer.connection;
     if ([videoConnection isVideoOrientationSupported])
@@ -295,11 +281,11 @@
                 [blackView removeFromSuperview];
                 
                 // DEBUG get the prize !
-                [self checkPrize];
+//                [self checkPrize];
 
                 // Close the scan View
-                [self dismissViewControllerAnimated:YES completion:nil];
-                [self performSegueWithIdentifier:@"show_transition" sender:self];
+//                [self dismissViewControllerAnimated:YES completion:nil];
+                [self performSegueWithIdentifier:@"segueFromScanToTransition" sender:self];
 //                dispatch_async(dispatch_get_main_queue(), {performSegueWithIdentifier(@"", self)});
                 
 //                dispatch_async(dispatch_get_main_queue(),{
@@ -314,90 +300,14 @@
     
 }
 
--(void)initPrizeArray
+-(NSString*)getGameCodeFrom: (NSString*)scanCode
 {
+    NSString *code = [[scanCode componentsSeparatedByString:@"#"] lastObject];
     
-    NSMutableDictionary *lot01 =[NSMutableDictionary
-                                 dictionaryWithDictionary: @{
-                                                             @"name": @"Casquette",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    NSMutableDictionary *lot02 = [NSMutableDictionary
-                                  dictionaryWithDictionary:@{
-                                                             @"name": @"T-Shirt",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    NSMutableDictionary *lot03 = [NSMutableDictionary
-                                  dictionaryWithDictionary:@{
-                                                             @"name": @"Stylo",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    NSMutableDictionary *lot04 = [NSMutableDictionary
-                                  dictionaryWithDictionary:@{
-                                                             @"name": @"Porte-Clé",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    _prizeArray = [NSMutableArray arrayWithObjects:
-                   lot01, lot02, lot03, lot04, nil];
-    
-    
-}
-
--(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold
-{
-    int looseLimit = 100 - winThreshold;
-    
-    // First: Do we win something ?
-    
-    int randomVal = (arc4random_uniform(100));
-    NSLog(@"random value: %d, Loose threshold:%d", randomVal, looseLimit);
-    if (randomVal < looseLimit){
-        // We loose ;-(
-        return -1;
-    }
-    
-    // Second: As we win something, ask what ?
-    
-    int prizeIndex = arc4random_uniform((u_int32_t)(_prizeArray.count));
-    
-    int num = [[_prizeArray[prizeIndex] objectForKey:@"stock"] intValue];
-    if (num <= 0){
-        NSLog(@"Stock épuisé pour %@ (%d)", _prizeArray[prizeIndex][@"name"], prizeIndex);
-        return -1;
-    }
-    NSNumber *newNum = [NSNumber numberWithInt:(num - 1)];
-    [_prizeArray[prizeIndex] setObject:newNum forKey:@"stock"];
-    
-    //    NSInteger stock = [_prizeArray[prizeIndex][@"stock"] integerValue];
-    //    [_prizeArray[prizeIndex] setObject:[NSNumber numberWithInt:stock--] forKey:@"stock"];
-    
-    NSLog(@"random index: %d", prizeIndex);
-    
-    return prizeIndex;
+    return code;
 }
 
 
--(void)checkPrize
-{
-    NSString *resultStr;
-    
-    // Check prize
-    NSInteger index = [self CheckPrizeWithThatPercentToWin:100];
-    
-    if (index >= 0){
-        
-        resultStr = [NSString stringWithFormat:@"Votre lot est: %@ stock: %@", _prizeArray[index][@"name"], _prizeArray[index][@"stock"]];
-        
-        NSLog(@"We Win something: %@ !", resultStr);
-    }else{
-        resultStr = [NSString stringWithFormat:@"Désolé vous n'avez pas gagné cette fois !"];
-        NSLog(@"We Loose: %@", resultStr);
-    }
-    
-    // Display Prize
-//    [_lblTitle performSelectorOnMainThread:@selector(setText:) withObject:resultStr waitUntilDone:NO];
-    
-}
 
 -(void)loadBeepSound{
     // Get the path to the beep.mp3 file and convert it to a NSURL object.
@@ -419,11 +329,13 @@
     }
 }
 
--(NSString*)getGameCodeFrom: (NSString*)scanCode
-{
-    NSString *code = [[scanCode componentsSeparatedByString:@"#"] lastObject];
-    
-    return code;
+#pragma mark - Segue action
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"segueFromScanToTransition"]) {
+        MediaPlayerViewController *destViewController = segue.destinationViewController;
+        destViewController.currentGameCode = _currentGameCode;
+    }
 }
 
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate method implementation
@@ -462,7 +374,7 @@
             break;
         }
     }else{
-        _highlightView.frame = CGRectOffset(highlightViewRect, 2000, 2000);
+        _highlightView.frame = CGRectOffset(highlightViewRect, 2000, 2000); // en dehors de l'ecran
     }
     
     
