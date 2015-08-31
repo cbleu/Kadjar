@@ -30,13 +30,11 @@
 @property (nonatomic, strong) UIView *highlightView;
 
 
-//-(IBAction)startStopReading:(id)sender;
+-(void)loadBeepSound;
 
 -(BOOL)startReading;
 -(void)stopReading;
 -(void)stopDetection;
-
--(void)loadBeepSound;
 
 
 @end

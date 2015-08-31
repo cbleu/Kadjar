@@ -27,6 +27,7 @@
     // Begin loading the sound effect so to have it ready for playback when it's needed.
     [self loadBeepSound];
     
+    // Prepare the green detection scan square
     _highlightView = [[UIView alloc] init];
     _highlightView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
     _highlightView.layer.borderColor = [UIColor greenColor].CGColor;
@@ -46,7 +47,6 @@
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:[UIDevice currentDevice]];
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -57,51 +57,40 @@
 - (void)orientationChanged:(NSNotification *)notification
 {
     _iOSDevice = notification.object;
-    
-//    _videoPreviewLayer.connection.videoOrientation = [self interfaceOrientationToVideoOrientation];
-    
-    //or
-    
-//    [self setAutoVideoConnectionOrientation:YES];
-    
 }
 
 -(BOOL)shouldAutorotate {
     return NO;
 }
 
-//- (NSUInteger)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskLandscapeLeft;
-////    UIInterfaceOrientationMaskLandscapeLeft| UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortrait |UIInterfaceOrientationMaskPortraitUpsideDown;
-//    //or simply UIInterfaceOrientationMaskAll;
-//}
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//    UIInterfaceOrientationMaskLandscapeLeft| UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortrait |UIInterfaceOrientationMaskPortraitUpsideDown;
+}
 
-//#pragma mark - IBAction method implementation
-//
-//- (IBAction)startStopReading:(id)sender {
-//    if (!_isReading) {
-//        // This is the case where the app should read a QR code when the start button is tapped.
-//        if ([self startReading]) {
-//            // If the startReading methods returns YES and the capture session is successfully
-//            // running, then change the start button title and the status message.
-////            [_bbitemStart setTitle:@"Stop"];
-////            [_lblStatus setText:@"Scanning for QR Code..."];
-//        }
-//    }
-//    else{
-//        // In this case the app is currently reading a QR code and it should stop doing so.
-//        [self stopReading];
-//        // The bar button item's title should change again.
-////        [_bbitemStart setTitle:@"Start!"];
-//    }
-//    
-//    // Set to the flag the exact opposite value of the one that currently has.
-//    _isReading = !_isReading;
-//}
-//
 
 #pragma mark - Private method implementation
 
+
+-(void)loadBeepSound{
+    // Get the path to the beep.mp3 file and convert it to a NSURL object.
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
+    NSURL *beepURL = [NSURL URLWithString:beepFilePath];
+    
+    NSError *error;
+    
+    // Initialize the audio player object using the NSURL object previously set.
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
+    if (error) {
+        // If the audio player cannot be initialized then log a message.
+        NSLog(@"Could not play beep file.");
+        NSLog(@"%@", [error localizedDescription]);
+    }
+    else{
+        // If the audio player was successfully initialized then load it in memory.
+        [_audioPlayer prepareToPlay];
+    }
+}
 
 - (BOOL)startReading {
     NSError *error;
@@ -109,11 +98,7 @@
     // Patch: Anti bounce flag
     _detectFlag = FALSE;
     
-    // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
-    // as the media type parameter.
-    
-//    AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-
+    // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video as the media type parameter.
     AVCaptureDevice *captureDevice = nil;
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     for(AVCaptureDevice *camera in devices) {
@@ -132,27 +117,6 @@
         return NO;
     }
 
-//    AVCaptureConnection *videoConnection = nil;
-//    
-//    for ( AVCaptureConnection *connection in [movieFileOutput connections] )
-//    {
-//        NSLog(@"%@", connection);
-//        for ( AVCaptureInputPort *port in [connection inputPorts] )
-//        {
-//            NSLog(@"%@", port);
-//            if ( [[port mediaType] isEqual:AVMediaTypeVideo] )
-//            {
-//                videoConnection = connection;
-//            }
-//        }
-//    }
-//
-//    if ([videoConnection isVideoOrientationSupported])
-//    {
-//        AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationLandscapeLeft;
-//        [videoConnection setVideoOrientation:orientation];
-//    }
-
     // Initialize the captureSession object.
     _captureSession = [[AVCaptureSession alloc] init];
     
@@ -167,42 +131,23 @@
     [captureMetadataOutput setMetadataObjectTypes:[NSArray arrayWithObject:AVMetadataObjectTypeQRCode]];
     
     // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
-    
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     
     [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
     [_videoPreviewLayer setFrame:_viewPreview.layer.bounds];
     [_viewPreview.layer addSublayer:_videoPreviewLayer];
     
-//        // Get the device orientation
-//        UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-//        _videoPreviewLayer.orientation = deviceOrientation;
-
+    // Adjust the capture orientation
     AVCaptureConnection *videoConnection = _videoPreviewLayer.connection;
-    
-    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
 
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-
-//    if ([videoConnection isVideoOrientationSupported])
-//    {
-//        AVCaptureVideoOrientation orient = (AVCaptureVideoOrientation)[UIDevice currentDevice].orientation;
-//        [videoConnection setVideoOrientation:orient];
-//    }
-
-    //Set landscape (if required)
     if ([videoConnection isVideoOrientationSupported])
     {
-        AVCaptureVideoOrientation orientation;
-        
-//        if (deviceOrientation == UIDeviceOrientationLandscapeRight || UIDeviceOrientationFaceUp) {   // inverse left and right for front camera ?
-        if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {   // inverse left and right for front camera ?
-            orientation = AVCaptureVideoOrientationLandscapeLeft;
+        UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+            [videoConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
         }else{
-            orientation = AVCaptureVideoOrientationLandscapeRight;
+            [videoConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
         }
-//        AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationLandscapeRight;//<<<<<SET VIDEO ORIENTATION IF LANDSCAPE
-        [videoConnection setVideoOrientation:orientation];
     }
 
     // Start video capture.
@@ -268,55 +213,20 @@
                 // Stop detection
                 [self performSelectorOnMainThread:@selector(stopReading) withObject:nil waitUntilDone:NO];
                 
-//                [_bbitemStart performSelectorOnMainThread:@selector(setTitle:) withObject:@"Start!" waitUntilDone:NO];
-                
-//                [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:_currentGameCode waitUntilDone:NO];
-                
                 [flashView removeFromSuperview];
                 [blackView removeFromSuperview];
-                
-                // DEBUG get the prize !
-//                [self checkPrize];
 
                 // Close the scan View
-//                [self dismissViewControllerAnimated:YES completion:nil];
                 [self performSegueWithIdentifier:@"segueFromScanToTransition" sender:self];
-//                dispatch_async(dispatch_get_main_queue(), {performSegueWithIdentifier(@"", self)});
-                
-//                dispatch_async(dispatch_get_main_queue(),{
-//                    self.performSegueWithIdentifier(mysegueIdentifier, self)
-//                });
 
             }];
         }];
     }];
-    
     _isReading = NO;
-    
 }
 
 
--(void)loadBeepSound{
-    // Get the path to the beep.mp3 file and convert it to a NSURL object.
-    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
-    NSURL *beepURL = [NSURL URLWithString:beepFilePath];
-    
-    NSError *error;
-    
-    // Initialize the audio player object using the NSURL object previously set.
-    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
-    if (error) {
-        // If the audio player cannot be initialized then log a message.
-        NSLog(@"Could not play beep file.");
-        NSLog(@"%@", [error localizedDescription]);
-    }
-    else{
-        // If the audio player was successfully initialized then load it in memory.
-        [_audioPlayer prepareToPlay];
-    }
-}
-
-#pragma mark - Segue action
+#pragma mark - navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segueFromScanToTransition"]) {
@@ -349,8 +259,7 @@
                 self.qrCodeString = [(AVMetadataMachineReadableCodeObject *)metadata stringValue];
                 
 //                [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:_qrCodeString waitUntilDone:NO];
-                
-                
+
                 if(!_detectFlag){
                     _detectFlag = true;
                     [self performSelector:@selector(stopDetection) withObject:self afterDelay:0.2 ];
@@ -361,9 +270,7 @@
     }else{
         _highlightView.frame = CGRectOffset(highlightViewRect, 2000, 2000); // en dehors de l'ecran
     }
-    
-    
-    
+
 }
 
 @end

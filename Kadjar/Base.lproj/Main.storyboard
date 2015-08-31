@@ -200,7 +200,7 @@
         <!--Form-->
         <scene sceneID="RGK-B7-qoB">
             <objects>
-                <viewController title="Form" id="dSu-97-mPy" sceneMemberID="viewController">
+                <viewController title="Form" id="dSu-97-mPy" customClass="FormViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RvH-H7-8IZ"/>
                         <viewControllerLayoutGuide type="bottom" id="ord-Uq-HxQ"/>
@@ -212,8 +212,9 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="ECRAN6" translatesAutoresizingMaskIntoConstraints="NO" id="Tfj-2A-20k">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NOM" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xZl-jb-0Fd">
-                                <rect key="frame" x="79" y="343" width="838" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="NOM" minimumFontSize="10" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xZl-jb-0Fd">
+                                <rect key="frame" x="77" y="332" width="838" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="cbE-c5-BTX"/>
                                     <constraint firstAttribute="height" constant="30" id="wVR-D8-Rqz"/>
@@ -231,8 +232,9 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PRENOM" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="b8d-b2-4Vh">
-                                <rect key="frame" x="79" y="402" width="838" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="PRENOM" minimumFontSize="10" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="b8d-b2-4Vh">
+                                <rect key="frame" x="77" y="392" width="838" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="l9B-Yd-I6z"/>
                                     <constraint firstAttribute="height" constant="30" id="lRq-dI-UFE"/>
@@ -251,28 +253,9 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="GSM" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UAJ-u4-bdi">
-                                <rect key="frame" x="79" y="517" width="838" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="exQ-CU-xZA"/>
-                                    <constraint firstAttribute="height" constant="30" id="tj2-cd-O8l"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="phonePad" returnKeyType="join" enablesReturnKeyAutomatically="YES"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="exQ-CU-xZA"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=compact-widthClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="exQ-CU-xZA"/>
-                                    </mask>
-                                </variation>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="EMAIL" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0TJ-QC-eET">
-                                <rect key="frame" x="79" y="461" width="838" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="EMAIL" minimumFontSize="10" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0TJ-QC-eET">
+                                <rect key="frame" x="77" y="450" width="838" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="hbo-Pt-P6J"/>
                                     <constraint firstAttribute="height" constant="30" id="n39-L2-O1K"/>
@@ -311,6 +294,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
+                                    <action selector="saveInfo:" destination="dSu-97-mPy" eventType="touchUpInside" id="CBo-Wh-Hus"/>
                                     <segue destination="AnI-GY-XBo" kind="presentation" identifier="segueFromFormToGreetings" modalTransitionStyle="crossDissolve" id="7GS-Zq-ujh"/>
                                 </connections>
                             </button>
@@ -337,6 +321,27 @@
                                     <segue destination="aP3-BI-UvU" kind="unwind" unwindAction="unwindToStart:" id="Wmd-MB-XyO"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="GSM" minimumFontSize="10" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UAJ-u4-bdi">
+                                <rect key="frame" x="77" y="511" width="838" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="exQ-CU-xZA"/>
+                                    <constraint firstAttribute="height" constant="30" id="tj2-cd-O8l"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="phonePad" returnKeyType="join" enablesReturnKeyAutomatically="YES"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="exQ-CU-xZA"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="exQ-CU-xZA"/>
+                                    </mask>
+                                </variation>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -381,6 +386,13 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
+                    <connections>
+                        <outlet property="buttonSend" destination="KZq-Dw-vNX" id="pS2-iH-c2z"/>
+                        <outlet property="txtEmail" destination="0TJ-QC-eET" id="D7k-la-Luh"/>
+                        <outlet property="txtFirstname" destination="xZl-jb-0Fd" id="upa-WD-LUv"/>
+                        <outlet property="txtGSM" destination="UAJ-u4-bdi" id="Hvv-LP-bDi"/>
+                        <outlet property="txtLastname" destination="b8d-b2-4Vh" id="Pzh-EV-jya"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONW-gH-8Nd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="aP3-BI-UvU" userLabel="Exit" sceneMemberID="exit"/>

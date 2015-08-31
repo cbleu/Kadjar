@@ -17,11 +17,12 @@
 
 
 @implementation FormViewController
-@synthesize switchClub;
+//@synthesize switchClub;
 @synthesize buttonSend;
 @synthesize txtFirstname;
 @synthesize txtLastname;
 @synthesize txtEmail;
+@synthesize txtGSM;
 
 
 - (void)viewDidLoad
@@ -32,7 +33,10 @@
 	// Make self the delegate of the textfields.
 	self.txtFirstname.delegate = self;
 	self.txtLastname.delegate = self;
-	self.txtEmail.delegate = self;
+    self.txtEmail.delegate = self;
+    self.txtGSM.delegate = self;
+    
+    _isFormOk = NO;
 	
 	// Initialize the dbManager object.
 	self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"clientInfoDB.sql"];
@@ -52,14 +56,18 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
 
 	if([self.txtFirstname.text isEqualToString:@""] || [self.txtLastname.text isEqualToString:@""] || [self.txtEmail.text isEqualToString:@""]) {
-		self.switchClub.enabled = false;
+//		self.switchClub.enabled = false;
+        _isFormOk = NO;
 	}else{
-		self.switchClub.enabled = true;
+//		self.switchClub.enabled = true;
+        _isFormOk = YES;
 	}
 	if (textField ==txtFirstname) {
 		[txtLastname becomeFirstResponder];
-	}else if ( textField == txtLastname){
-		[txtEmail becomeFirstResponder];
+    }else if ( textField == txtLastname){
+        [txtEmail becomeFirstResponder];
+    }else if ( textField == txtEmail){
+        [txtGSM becomeFirstResponder];
 	}else{
 		[textField resignFirstResponder];
 	}
@@ -105,7 +113,7 @@
 	
 	// Prepare the query string.
 	NSString *query;
-	query = [NSString stringWithFormat:@"insert into clientInfo values(null, '%@', '%@', '%@')", self.txtFirstname.text, self.txtLastname.text, self.txtEmail.text];
+	query = [NSString stringWithFormat:@"insert into clientInfo values(null, '%@', '%@', '%@', '%@')", self.txtFirstname.text, self.txtLastname.text, self.txtEmail.text, self.txtGSM.text];
 	
 	// Execute the query.
 	[self.dbManager executeQuery:query];
@@ -123,15 +131,15 @@
 }
 
 
--(IBAction) switchPressedAction:(id)sender {
-
-//    NSLog(@"switchClub:%d", switchClub.on);
-    if(switchClub.on){
-		self.buttonSend.enabled = YES;
-    }else{
-		self.buttonSend.enabled = NO;
-	}
-}
+//-(IBAction) switchPressedAction:(id)sender {
+//
+////    NSLog(@"switchClub:%d", switchClub.on);
+//    if(switchClub.on){
+//		self.buttonSend.enabled = YES;
+//    }else{
+//		self.buttonSend.enabled = NO;
+//	}
+//}
 
 #pragma mark - Private method implementation
 
