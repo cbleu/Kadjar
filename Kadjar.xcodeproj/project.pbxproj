@@ -26,7 +26,7 @@
 		DB110F041B8F4226005F1298 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB110F031B8F4226005F1298 /* beep.mp3 */; };
 		DB110F061B8F580B005F1298 /* ECRAN3BD.mov in Resources */ = {isa = PBXBuildFile; fileRef = DB110F051B8F580B005F1298 /* ECRAN3BD.mov */; };
 		DB76F2FA1B9461AD00A3927B /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76F2F91B9461AD00A3927B /* GameViewController.m */; };
-		DB76F2FD1B947E0300A3927B /* StepUiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76F2FC1B947E0300A3927B /* StepUiViewController.m */; };
+		DB76F2FD1B947E0300A3927B /* StepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76F2FC1B947E0300A3927B /* StepViewController.m */; };
 		DBEE06901B8F77950086ECB5 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEE068F1B8F77950086ECB5 /* MediaPlayerViewController.m */; };
 		DBF384A21B8F5FC200E412DB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF384A11B8F5FC200E412DB /* AVFoundation.framework */; };
 		DBF384A41B8F5FCC00E412DB /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF384A31B8F5FCC00E412DB /* AVKit.framework */; };
@@ -73,8 +73,8 @@
 		DB110F051B8F580B005F1298 /* ECRAN3BD.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = ECRAN3BD.mov; sourceTree = "<group>"; };
 		DB76F2F81B9461AD00A3927B /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		DB76F2F91B9461AD00A3927B /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
-		DB76F2FB1B947E0300A3927B /* StepUiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepUiViewController.h; sourceTree = "<group>"; };
-		DB76F2FC1B947E0300A3927B /* StepUiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepUiViewController.m; sourceTree = "<group>"; };
+		DB76F2FB1B947E0300A3927B /* StepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepViewController.h; sourceTree = "<group>"; };
+		DB76F2FC1B947E0300A3927B /* StepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepViewController.m; sourceTree = "<group>"; };
 		DBEE068E1B8F77950086ECB5 /* MediaPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPlayerViewController.h; sourceTree = "<group>"; };
 		DBEE068F1B8F77950086ECB5 /* MediaPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPlayerViewController.m; sourceTree = "<group>"; };
 		DBF384A11B8F5FC200E412DB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -145,8 +145,8 @@
 				DB76F2F91B9461AD00A3927B /* GameViewController.m */,
 				DB110EEF1B8F1AE4005F1298 /* FormViewController.h */,
 				DB110EF01B8F1AE4005F1298 /* FormViewController.m */,
-				DB76F2FB1B947E0300A3927B /* StepUiViewController.h */,
-				DB76F2FC1B947E0300A3927B /* StepUiViewController.m */,
+				DB76F2FB1B947E0300A3927B /* StepViewController.h */,
+				DB76F2FC1B947E0300A3927B /* StepViewController.m */,
 				DB110ECB1B8F19DF005F1298 /* Main.storyboard */,
 				DB110ECE1B8F19DF005F1298 /* Images.xcassets */,
 				DB110F051B8F580B005F1298 /* ECRAN3BD.mov */,
@@ -291,7 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB76F2FD1B947E0300A3927B /* StepUiViewController.m in Sources */,
+				DB76F2FD1B947E0300A3927B /* StepViewController.m in Sources */,
 				DB110ECA1B8F19DF005F1298 /* ScanViewController.m in Sources */,
 				DB110EFC1B8F1B34005F1298 /* StartViewController.m in Sources */,
 				DB110EC71B8F19DF005F1298 /* AppDelegate.m in Sources */,

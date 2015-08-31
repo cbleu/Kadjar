@@ -8,22 +8,10 @@
 
 #import "GameViewController.h"
 
-@interface GameViewController ()
-
-@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
-
--(void)loadBeepSound;
-
--(void)checkPrize;
--(void)initPrizeArray;
--(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold;
--(NSString*)getGameCodeFrom: (NSString*)scanCode;
-
-@end
-
 
 @implementation GameViewController
 
+@synthesize qrCodeString;
 @synthesize imageToDisplay;
 
 
@@ -114,7 +102,7 @@
     NSString *resultStr;
     
     // Check prize
-    NSInteger index = [self CheckPrizeWithThatPercentToWin:10];
+    NSInteger index = [self CheckPrizeWithThatPercentToWin:50];
     
     if (index >= 0){
         
@@ -153,7 +141,8 @@
 }
 
 
--(void)loadBeepSound{
+-(void)loadBeepSound
+{
     // Get the path to the beep.mp3 file and convert it to a NSURL object.
     NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
     NSURL *beepURL = [NSURL URLWithString:beepFilePath];

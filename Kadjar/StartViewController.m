@@ -9,6 +9,8 @@
 
 #import "StartViewController.h"
 #import "DBManager.h"
+#import "StepViewController.h"
+#import "FormViewController.h"
 
 @interface StartViewController ()
 
@@ -67,6 +69,20 @@
         self.buttonErase.enabled = YES;
     }else{
         self.buttonErase.enabled = NO;
+    }
+}
+
+- (IBAction)unwindToStart:(UIStoryboardSegue *)unwindSegue
+{
+    UIViewController* sourceViewController = unwindSegue.sourceViewController;
+    
+    if ([sourceViewController isKindOfClass:[StepViewController class]])
+    {
+        NSLog(@"Coming from StepUIViewController!");
+    }
+    else if ([sourceViewController isKindOfClass:[FormViewController class]])
+    {
+        NSLog(@"Coming from FormViewController!");
     }
 }
 

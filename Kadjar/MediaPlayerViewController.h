@@ -12,6 +12,16 @@
 
 @interface MediaPlayerViewController : UIViewController
 
-@property (nonatomic, strong) NSString *currentGameCode;
+
+
+
+@property (nonatomic, retain) AVPlayerViewController *avPlayerViewcontroller;
+
+@property (nonatomic, strong) NSString *qrCodeString;
+
+
+
+
+-(void)itemDidFinishPlaying:(NSNotification *) notification;
 
 @end

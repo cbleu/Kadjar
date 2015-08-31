@@ -10,15 +10,6 @@
 #import <NotificationCenter/NotificationCenter.h>
 #import "GameViewController.h"
 
-@interface MediaPlayerViewController ()
-
-@property (nonatomic, retain) AVPlayerViewController *avPlayerViewcontroller;
-
-
--(void)itemDidFinishPlaying:(NSNotification *) notification;
-
-@end
-
 
 @implementation MediaPlayerViewController
 
@@ -87,7 +78,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segueFromScanToTransition"]) {
         GameViewController *destViewController = segue.destinationViewController;
-        destViewController.currentGameCode = _currentGameCode;
+        destViewController.qrCodeString = self.qrCodeString;
     }
 }
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StepUiViewController : UIViewController
+@interface StepViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *sequeButton;
 

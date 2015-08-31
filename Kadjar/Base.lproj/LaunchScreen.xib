@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,37 +11,38 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Kadjar_splash" translatesAutoresizingMaskIntoConstraints="NO" id="McT-dE-xL5">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Kadjar-splash-clear" translatesAutoresizingMaskIntoConstraints="NO" id="McT-dE-xL5">
                     <rect key="frame" x="0.0" y="0.0" width="485" height="480"/>
+                    <color key="backgroundColor" red="0.92493528729767749" green="0.92743473336304216" blue="0.88377563634211265" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 c-bleu. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
                     <rect key="frame" x="20" y="439" width="441" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="GWw-N8-sDV"/>
+                        <constraint firstAttribute="height" constant="21" id="63U-sg-FxG"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kadjar" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="20" y="0.0" width="441" height="43"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Medicis-MAIL" translatesAutoresizingMaskIntoConstraints="NO" id="fGu-Ty-41M">
+                    <rect key="frame" x="193" y="8" width="99" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="29" id="BEb-0m-01L"/>
+                        <constraint firstAttribute="width" constant="99" id="Deu-1f-r8y"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="McT-dE-xL5" secondAttribute="top" id="FbG-sn-d5l"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="KGX-sj-Cs3"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MTx-yX-OFX"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OFl-h1-SJy"/>
-                <constraint firstAttribute="bottom" secondItem="McT-dE-xL5" secondAttribute="bottom" id="TYo-g6-lLJ"/>
-                <constraint firstAttribute="trailing" secondItem="McT-dE-xL5" secondAttribute="trailing" constant="-5" id="chq-F1-VoT"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="8ie-xW-0ye" secondAttribute="leading" id="cok-HS-ddX"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" id="f0M-Zz-WOG"/>
-                <constraint firstItem="McT-dE-xL5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fbw-kK-knj"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="gep-b9-Jfb"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="1SY-UF-oHk"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3RE-hX-nNu"/>
+                <constraint firstItem="McT-dE-xL5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5Tc-b8-twk"/>
+                <constraint firstAttribute="bottom" secondItem="McT-dE-xL5" secondAttribute="bottom" id="EGE-Xk-H9A"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="FSI-w5-tcq"/>
+                <constraint firstItem="McT-dE-xL5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TC3-9F-FCB"/>
+                <constraint firstItem="fGu-Ty-41M" firstAttribute="centerX" secondItem="McT-dE-xL5" secondAttribute="centerX" id="nxK-rG-7Ov"/>
+                <constraint firstAttribute="trailing" secondItem="McT-dE-xL5" secondAttribute="trailing" constant="-5" id="vfs-Rd-LHc"/>
+                <constraint firstItem="fGu-Ty-41M" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="xmV-JD-M1I"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -48,6 +50,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Kadjar_splash" width="1024" height="768"/>
+        <image name="Kadjar-splash-clear" width="1024" height="768"/>
+        <image name="Medicis-MAIL" width="180" height="53"/>
     </resources>
 </document>

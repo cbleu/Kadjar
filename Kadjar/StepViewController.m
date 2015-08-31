@@ -6,21 +6,21 @@
 //  Copyright (c) 2015 c-bleu. All rights reserved.
 //
 
-#import "StepUiViewController.h"
+#import "StepViewController.h"
 
-@interface StepUiViewController ()
--(void)actionButton;
+@interface StepViewController ()
+-(void)actionSegue;
 
 @end
 
-@implementation StepUiViewController
+@implementation StepViewController
 
 @synthesize sequeButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self performSelector:@selector(actionButton) withObject:self afterDelay:5.0 ];
+    [self performSelector:@selector(actionSegue) withObject:self afterDelay:5.0 ];
     NSLog(@"Retour automatique vers l'accueil dans 5 sec...");
 }
 
@@ -29,10 +29,11 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)actionButton
+-(void)actionSegue
 {
     NSLog(@"Retour vers l'accueil !");
-    [self performSegueWithIdentifier:@"dismissFromGreetingsToStart" sender:self];
+//    [self performSelector:@selector(actionButton) withObject:self afterDelay:5.0 ];
+    [self performSegueWithIdentifier:@"unwindToStartSegue" sender:self];
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

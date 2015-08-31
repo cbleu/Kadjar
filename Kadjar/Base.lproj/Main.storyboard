@@ -50,7 +50,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="975" y="-207"/>
+            <point key="canvasLocation" x="-428" y="-1024"/>
         </scene>
         <!--StartScan-->
         <scene sceneID="hZ6-Vs-nny">
@@ -92,7 +92,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xur-t3-dNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="975" y="1137"/>
+            <point key="canvasLocation" x="383" y="-1024"/>
         </scene>
         <!--Scan-->
         <scene sceneID="YhC-00-41u">
@@ -128,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQ8-TU-6hE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1919" y="1137"/>
+            <point key="canvasLocation" x="1663" y="-1024"/>
         </scene>
         <!--Transition-->
         <scene sceneID="Tdd-fy-s8f">
@@ -149,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRc-To-dFx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2787" y="1137"/>
+            <point key="canvasLocation" x="2732" y="-1024"/>
         </scene>
         <!--Gagné-->
         <scene sceneID="VaU-vg-UtP">
@@ -166,10 +166,10 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="ECRAN5-gagne" translatesAutoresizingMaskIntoConstraints="NO" id="oDP-It-xPv">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufq-Er-Nea">
-                                <rect key="frame" x="401" y="486" width="202" height="58"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufq-Er-Nea">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="Suivant -&gt;">
+                                <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -180,9 +180,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oDP-It-xPv" firstAttribute="top" secondItem="xHA-KR-3ja" secondAttribute="top" id="6Av-I6-Rhu"/>
+                            <constraint firstAttribute="trailing" secondItem="ufq-Er-Nea" secondAttribute="trailing" id="AYT-ah-SK1"/>
                             <constraint firstAttribute="trailing" secondItem="oDP-It-xPv" secondAttribute="trailing" id="HIo-G3-DNO"/>
+                            <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="ufq-Er-Nea" secondAttribute="bottom" id="QB9-p3-18Y"/>
                             <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="oDP-It-xPv" secondAttribute="bottom" id="QtO-Kn-Sf6"/>
+                            <constraint firstItem="ufq-Er-Nea" firstAttribute="top" secondItem="xHA-KR-3ja" secondAttribute="top" id="Y5q-2q-Z2L"/>
                             <constraint firstItem="oDP-It-xPv" firstAttribute="leading" secondItem="xHA-KR-3ja" secondAttribute="leading" id="fq0-Pz-Idg"/>
+                            <constraint firstItem="ufq-Er-Nea" firstAttribute="leading" secondItem="xHA-KR-3ja" secondAttribute="leading" id="r1Q-hv-vxi"/>
                         </constraints>
                     </view>
                     <connections>
@@ -191,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1g6-EA-t6l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3511" y="1137"/>
+            <point key="canvasLocation" x="3599" y="-1024"/>
         </scene>
         <!--Form-->
         <scene sceneID="RGK-B7-qoB">
@@ -330,7 +334,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="custom" identifier="dismissFromFormToStart" customClass="DismissSegue" id="EL9-KB-COO"/>
+                                    <segue destination="aP3-BI-UvU" kind="unwind" unwindAction="unwindToStart:" id="Wmd-MB-XyO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -379,13 +383,14 @@
                     <size key="freeformSize" width="1024" height="768"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONW-gH-8Nd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="aP3-BI-UvU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4619" y="-1251"/>
+            <point key="canvasLocation" x="4912" y="-1024"/>
         </scene>
         <!--Greetings-->
         <scene sceneID="lbT-78-n4Q">
             <objects>
-                <viewController title="Greetings" id="AnI-GY-XBo" customClass="StepUiViewController" sceneMemberID="viewController">
+                <viewController title="Greetings" id="AnI-GY-XBo" customClass="StepViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KXB-4G-sBr"/>
                         <viewControllerLayoutGuide type="bottom" id="9h0-Oq-4Si"/>
@@ -402,6 +407,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="rDU-au-Ko1" kind="unwind" identifier="unwindToStartSegue" unwindAction="unwindToStart:" id="QMc-tz-fIX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -416,13 +424,11 @@
                             <constraint firstItem="5Ef-gK-lVR" firstAttribute="bottom" secondItem="9h0-Oq-4Si" secondAttribute="top" id="w7a-ET-bJk"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="custom" identifier="dismissFromGreetingsToStart" customClass="DismissSegue" id="TWi-Gi-aEE"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O4a-TJ-A9h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="rDU-au-Ko1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4619" y="-92"/>
+            <point key="canvasLocation" x="6251" y="-1024"/>
         </scene>
     </scenes>
     <resources>
@@ -432,7 +438,4 @@
         <image name="ECRAN6" width="1024" height="768"/>
         <image name="ECRAN7" width="1024" height="768"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="TWi-Gi-aEE"/>
-    </inferredMetricsTieBreakers>
 </document>
