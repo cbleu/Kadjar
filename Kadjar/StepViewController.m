@@ -9,7 +9,6 @@
 #import "StepViewController.h"
 
 @interface StepViewController ()
--(void)actionSegue;
 
 @end
 
@@ -20,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self performSelector:@selector(actionSegue) withObject:self afterDelay:5.0 ];
+    [self performSelector:@selector(actionSegue:) withObject:self afterDelay:5.0 ];
     NSLog(@"Retour automatique vers l'accueil dans 5 sec...");
 }
 
@@ -29,7 +28,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)actionSegue
+-(IBAction)actionSegue:(id)sender
 {
     NSLog(@"Retour vers l'accueil !");
 //    [self performSelector:@selector(actionButton) withObject:self afterDelay:5.0 ];

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBManager.h"
 
 @interface FormViewController : UIViewController <UITextFieldDelegate>
 
@@ -26,9 +27,15 @@
 
 @property (nonatomic) bool isFormOk;
 
+@property (nonatomic, strong) DBManager *dbManager;
+
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+
+@property (nonatomic, weak) UITextField *activeField;
 
 - (IBAction)saveInfo:(id)sender;
 
 //- (IBAction)switchPressedAction:(id)sender;
+-(void)registerForKeyboardNotifications;
 
 @end

@@ -12,4 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *sequeButton;
 
+
+-(IBAction)actionSegue:(id)sender;
+
 @end

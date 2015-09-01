@@ -20,11 +20,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+//    // Begin loading the sound effect so to have it ready for playback when it's needed.
+//    [self loadBeepSound];
+
+    // Init Prizes array with stock
     [self initPrizeArray];
     
     // DEBUG get the prize !
     [self checkPrize];
-    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,10 +117,10 @@
         UIImage *image = [UIImage imageNamed:@"ECRAN5-gagne"];
         [imageToDisplay setImage:image];
 
-        // If the audio player is not nil, then play the sound effect.
-        if (_audioPlayer) {
-            [_audioPlayer play];
-        }
+//        // If the audio player is not nil, then play the sound effect.
+//        if (_audioPlayer) {
+//            [_audioPlayer play];
+//        }
 
 //        [self performSelector:@selector(displayWinView) withObject:self afterDelay:0.2 ];
 
@@ -128,10 +132,10 @@
         UIImage *image = [UIImage imageNamed:@"ECRAN5-dommage"];
         [imageToDisplay setImage:image];
         
-        // If the audio player is not nil, then play the sound effect.
-        if (_audioPlayer) {
-            [_audioPlayer play];
-        }
+//        // If the audio player is not nil, then play the sound effect.
+//        if (_audioPlayer) {
+//            [_audioPlayer play];
+//        }
         
     }
     
@@ -144,7 +148,8 @@
 -(void)loadBeepSound
 {
     // Get the path to the beep.mp3 file and convert it to a NSURL object.
-    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"montage-win" ofType:@"mp3"];
+//    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
     NSURL *beepURL = [NSURL URLWithString:beepFilePath];
     
     NSError *error;

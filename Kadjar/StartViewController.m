@@ -117,7 +117,7 @@
     [picker setSubject:@"Export CSV de la base client"];
     
     // Set up recipients
-    NSArray *toRecipients = [NSArray arrayWithObject:@"contact@scotta.fr"];
+    NSArray *toRecipients = [NSArray arrayWithObject:@"contact@cbleu.re"];
     // NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
     // NSArray *bccRecipients = [NSArray arrayWithObject:@"fourth@example.com"];
     

@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) NSString *qrCodeString;
 
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 
 
 
