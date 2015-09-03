@@ -27,16 +27,16 @@
 		DB110F061B8F580B005F1298 /* ECRAN3BD.mov in Resources */ = {isa = PBXBuildFile; fileRef = DB110F051B8F580B005F1298 /* ECRAN3BD.mov */; };
 		DB25D8DB1B9839E90046E86B /* EmailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25D8DA1B9839E90046E86B /* EmailTableViewCell.m */; };
 		DB25D8DE1B984F180046E86B /* GameStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25D8DD1B984F180046E86B /* GameStartViewController.m */; };
-		DB69CF961B97335D0009CC24 /* montage-lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB69CF951B97335D0009CC24 /* montage-lose.mp3 */; };
 		DB69CF991B977FAD0009CC24 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB69CF981B977FAD0009CC24 /* SettingsTableViewController.m */; };
 		DB69CF9C1B9799610009CC24 /* PrizesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB69CF9B1B9799610009CC24 /* PrizesTableViewController.m */; };
 		DB69CF9F1B980A2A0009CC24 /* PrizeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB69CF9E1B980A2A0009CC24 /* PrizeTableViewCell.m */; };
 		DB7121631B989AC20058409F /* DBRecordClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7121621B989AC20058409F /* DBRecordClient.m */; };
+		DB7121661B98F8780058409F /* Drum-Roll-Lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB7121641B98F8780058409F /* Drum-Roll-Lose.mp3 */; };
+		DB7121671B98F8780058409F /* Drum-Roll-Win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB7121651B98F8780058409F /* Drum-Roll-Win.mp3 */; };
 		DB76F2FA1B9461AD00A3927B /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76F2F91B9461AD00A3927B /* GameViewController.m */; };
 		DB76F2FD1B947E0300A3927B /* StepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76F2FC1B947E0300A3927B /* StepViewController.m */; };
 		DB76F2FF1B950AB000A3927B /* StartScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76F2FE1B950AB000A3927B /* StartScanViewController.m */; };
 		DB76F3021B95BC0500A3927B /* ECRAN3BD-audio.mov in Resources */ = {isa = PBXBuildFile; fileRef = DB76F3011B95BC0500A3927B /* ECRAN3BD-audio.mov */; };
-		DB76F3071B95C55300A3927B /* montage-win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB76F3061B95C55300A3927B /* montage-win.mp3 */; };
 		DBEE06901B8F77950086ECB5 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEE068F1B8F77950086ECB5 /* MediaPlayerViewController.m */; };
 		DBF384A21B8F5FC200E412DB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF384A11B8F5FC200E412DB /* AVFoundation.framework */; };
 		DBF384A41B8F5FCC00E412DB /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF384A31B8F5FCC00E412DB /* AVKit.framework */; };
@@ -85,7 +85,6 @@
 		DB25D8DA1B9839E90046E86B /* EmailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailTableViewCell.m; sourceTree = "<group>"; };
 		DB25D8DC1B984F180046E86B /* GameStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStartViewController.h; sourceTree = "<group>"; };
 		DB25D8DD1B984F180046E86B /* GameStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStartViewController.m; sourceTree = "<group>"; };
-		DB69CF951B97335D0009CC24 /* montage-lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "montage-lose.mp3"; sourceTree = "<group>"; };
 		DB69CF971B977FAD0009CC24 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		DB69CF981B977FAD0009CC24 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		DB69CF9A1B9799610009CC24 /* PrizesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrizesTableViewController.h; sourceTree = "<group>"; };
@@ -94,6 +93,8 @@
 		DB69CF9E1B980A2A0009CC24 /* PrizeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrizeTableViewCell.m; sourceTree = "<group>"; };
 		DB7121611B989AC20058409F /* DBRecordClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRecordClient.h; sourceTree = "<group>"; };
 		DB7121621B989AC20058409F /* DBRecordClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRecordClient.m; sourceTree = "<group>"; };
+		DB7121641B98F8780058409F /* Drum-Roll-Lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Drum-Roll-Lose.mp3"; sourceTree = "<group>"; };
+		DB7121651B98F8780058409F /* Drum-Roll-Win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Drum-Roll-Win.mp3"; sourceTree = "<group>"; };
 		DB76F2F81B9461AD00A3927B /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		DB76F2F91B9461AD00A3927B /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		DB76F2FB1B947E0300A3927B /* StepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepViewController.h; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		DB76F2FE1B950AB000A3927B /* StartScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartScanViewController.m; sourceTree = "<group>"; };
 		DB76F3001B950AC400A3927B /* StartScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScanViewController.h; sourceTree = "<group>"; };
 		DB76F3011B95BC0500A3927B /* ECRAN3BD-audio.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "ECRAN3BD-audio.mov"; sourceTree = "<group>"; };
-		DB76F3061B95C55300A3927B /* montage-win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "montage-win.mp3"; sourceTree = "<group>"; };
 		DBEE068E1B8F77950086ECB5 /* MediaPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPlayerViewController.h; sourceTree = "<group>"; };
 		DBEE068F1B8F77950086ECB5 /* MediaPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPlayerViewController.m; sourceTree = "<group>"; };
 		DBF384A11B8F5FC200E412DB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -180,8 +180,8 @@
 				DB110ECE1B8F19DF005F1298 /* Images.xcassets */,
 				DB110F051B8F580B005F1298 /* ECRAN3BD.mov */,
 				DB76F3011B95BC0500A3927B /* ECRAN3BD-audio.mov */,
-				DB76F3061B95C55300A3927B /* montage-win.mp3 */,
-				DB69CF951B97335D0009CC24 /* montage-lose.mp3 */,
+				DB7121641B98F8780058409F /* Drum-Roll-Lose.mp3 */,
+				DB7121651B98F8780058409F /* Drum-Roll-Win.mp3 */,
 				DB110F031B8F4226005F1298 /* beep.mp3 */,
 				DB110ED01B8F19DF005F1298 /* LaunchScreen.xib */,
 				DB110EC11B8F19DE005F1298 /* Supporting Files */,
@@ -312,11 +312,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB7121671B98F8780058409F /* Drum-Roll-Win.mp3 in Resources */,
+				DB7121661B98F8780058409F /* Drum-Roll-Lose.mp3 in Resources */,
 				DB110ECD1B8F19DF005F1298 /* Main.storyboard in Resources */,
 				DB110F041B8F4226005F1298 /* beep.mp3 in Resources */,
-				DB69CF961B97335D0009CC24 /* montage-lose.mp3 in Resources */,
 				DB110F061B8F580B005F1298 /* ECRAN3BD.mov in Resources */,
-				DB76F3071B95C55300A3927B /* montage-win.mp3 in Resources */,
 				DB110ED21B8F19DF005F1298 /* LaunchScreen.xib in Resources */,
 				DB110ECF1B8F19DF005F1298 /* Images.xcassets in Resources */,
 				DB110EF71B8F1AE4005F1298 /* clientInfoDB.sql in Resources */,

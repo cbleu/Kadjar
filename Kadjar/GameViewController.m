@@ -110,7 +110,7 @@
 }
 
 
--(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold
+-(NSInteger)CheckPrizeWithThatPercentToWinOld:(int)winThreshold
 {
     int looseLimit = 100 - winThreshold;
     
@@ -143,6 +143,75 @@
     return prizeIndex;
 }
 
+-(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    int looseLimit = 100 - winThreshold;
+    
+    // First: Do we win something ?
+    
+    int randomVal = (arc4random_uniform(100));
+    NSLog(@"random value: %d, Loose threshold:%d", randomVal, looseLimit);
+    if (randomVal < looseLimit){
+        // We loose ;-(
+        return -1;
+    }
+    
+    // Second: As we win something, ask what ?
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"stock > 0" ];
+    NSArray *filteredPrize = [_prizeArray filteredArrayUsingPredicate:predicate];
+    
+    NSLog(@"filteredArray: %@", filteredPrize);
+
+    if (filteredPrize.count <= 0) {
+        NSLog(@"ATTENTION: Il n'y a plus aucun lot à gagner !!!!");
+        return -1;
+    }else{
+        NSLog(@"Il reste %d sur %d types de lots à gagner", filteredPrize.count, _prizeArray.count);
+    }
+    
+    int totalStock = 0;
+
+    for (id key in filteredPrize) {
+//        id value = [filteredPrize objectAtIndex:key];
+        NSInteger st = [key[@"stock"] integerValue];
+        totalStock += st;
+    }
+    NSLog(@"Stock total restant: %d", totalStock);
+    while (true) {
+        
+        int prizeIndex = arc4random_uniform((u_int32_t)(filteredPrize.count));
+        
+        int actualStock = [[filteredPrize[prizeIndex] objectForKey:@"stock"] intValue];
+        
+        // Random sur le stock total
+        int secondFire = arc4random_uniform((u_int32_t)(totalStock));
+        NSLog(@"Tirage fIdx=%D => %d pour %d",prizeIndex, secondFire, actualStock);
+
+        // On test si le tirage est tombé dans le stock du lot
+        if (secondFire > actualStock) {
+            // Non, on passe à un autre lot
+            continue;   // On refait un tirage de lot
+        }
+        NSNumber *newstock = [NSNumber numberWithInt:(actualStock - 1)];
+        [filteredPrize[prizeIndex] setObject:newstock forKey:@"stock"];
+
+        NSInteger fullIndex=[_prizeArray indexOfObject:filteredPrize[prizeIndex]];
+
+        // Update des stocks
+        [defaults setInteger: [newstock integerValue] forKey: _prizeArray[fullIndex][@"name"]];
+        
+        NSLog(@"Filtered index: %d", prizeIndex);
+        NSLog(@"index dans _prizeArray: %d", fullIndex);
+
+        
+        return fullIndex;
+    }
+    
+}
+
 
 -(void)checkPrize
 {
@@ -152,9 +221,27 @@
     
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    DBRecordClient *result = [[DBRecordClient alloc] init];
     _currentPlayer= [[DBRecordClient alloc] init];
-    _currentPlayer = [appDelegate isGameCodeExist: [self getGameCodeFrom: self.qrCodeString]];
+    
+    NSString *scanCode = [self getGameCodeFrom: self.qrCodeString];
+    
+    if(_isAbadCode){
+        NSLog(@"ERROR: Bad Code, back to start");
+        [self performSegueWithIdentifier:@"unwindToGameStartForBadCode" sender:self];
+        
+        resultStr = [NSString stringWithFormat:@"Désolé vous n'avez pas gagné cette fois !"];
+        _prizeWinned = @"";
+        
+        [prizeLabel setText:@"ERREUR Ce QR Code ne fait pas partie du jeu !"];
+        
+        UIImage *image = [UIImage imageNamed:@"ERROR-txt"];
+        [imageToDisplay setImage:image];
+        
+        [self.errorButton setHidden:NO];
+
+        return;
+    }
+    _currentPlayer = [appDelegate isGameCodeExist: scanCode];
     
     if(! _currentPlayer){
 
@@ -242,7 +329,7 @@
 
 -(void)loadWinSound
 {
-    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"montage-win" ofType:@"mp3"];
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"Drum-Roll-Win" ofType:@"mp3"];
     NSURL *beepURL = [NSURL URLWithString:beepFilePath];
     NSError *error;
     
@@ -260,7 +347,7 @@
 
 -(void)loadLoseSound
 {
-    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"montage-lose" ofType:@"mp3"];
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"Drum-Roll-Lose" ofType:@"mp3"];
     NSURL *beepURL = [NSURL URLWithString:beepFilePath];
     NSError *error;
     
@@ -278,7 +365,20 @@
 {
     NSString *code = [[scanCode componentsSeparatedByString:@"#"] lastObject];
     
-    return code;
+    NSCharacterSet *unacceptedInput = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
+
+    // If there are any characters that I do not want in the text field, return NO.
+    bool passTest = ([[code componentsSeparatedByCharactersInSet:unacceptedInput] count] <= 1);
+    NSLog(@"passTest du QR Code: %d", passTest);
+    
+    if(passTest == NO){
+        _isAbadCode = YES;
+        return @"BAD_CODE";
+    }else{
+        _isAbadCode = NO;
+        return code;
+    }
+
 }
 
 

@@ -540,7 +540,16 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="dSu-97-mPy" kind="showDetail" id="XVR-b0-6b6"/>
+                                    <segue destination="dSu-97-mPy" kind="showDetail" id="obg-Lw-flF"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXa-yh-2IF" userLabel="ERROR button">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <state key="normal" backgroundImage="Medicis-MAIL">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="23G-R9-L5P" kind="unwind" identifier="unwindToGameStartForBadCode" unwindAction="unwindToGameStart:" id="b2i-ab-8bT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufq-Er-Nea">
@@ -576,8 +585,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="VRd-iS-maD" secondAttribute="trailing" constant="39" id="1Jq-4e-04I"/>
+                            <constraint firstItem="bXa-yh-2IF" firstAttribute="leading" secondItem="xHA-KR-3ja" secondAttribute="leading" id="3mH-Nn-pwi"/>
                             <constraint firstItem="oDP-It-xPv" firstAttribute="top" secondItem="xHA-KR-3ja" secondAttribute="top" id="6Av-I6-Rhu"/>
                             <constraint firstItem="ufq-Er-Nea" firstAttribute="trailing" secondItem="xHA-KR-3ja" secondAttribute="trailingMargin" id="6in-sC-8Lr"/>
+                            <constraint firstAttribute="trailing" secondItem="bXa-yh-2IF" secondAttribute="trailing" id="7nB-qZ-c8f"/>
                             <constraint firstItem="VRd-iS-maD" firstAttribute="centerX" secondItem="ufq-Er-Nea" secondAttribute="centerX" constant="-15.5" id="93t-Lz-lap"/>
                             <constraint firstItem="ahM-7x-qAN" firstAttribute="trailing" secondItem="xHA-KR-3ja" secondAttribute="trailingMargin" id="AEj-CN-TRe"/>
                             <constraint firstItem="ufq-Er-Nea" firstAttribute="top" secondItem="VRd-iS-maD" secondAttribute="bottom" priority="750" id="Br8-v0-CYE"/>
@@ -586,6 +597,7 @@
                             <constraint firstItem="5LP-De-2H9" firstAttribute="leading" secondItem="xHA-KR-3ja" secondAttribute="leading" id="OIP-Fo-zhf"/>
                             <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="ufq-Er-Nea" secondAttribute="bottom" constant="20" id="Pz8-89-Xss"/>
                             <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="oDP-It-xPv" secondAttribute="bottom" id="QtO-Kn-Sf6"/>
+                            <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="bXa-yh-2IF" secondAttribute="bottom" id="UiJ-gl-NWR"/>
                             <constraint firstItem="ahM-7x-qAN" firstAttribute="top" secondItem="KQd-PE-mdg" secondAttribute="bottom" id="XP1-RQ-oTo"/>
                             <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="hyO-SC-nr6" secondAttribute="bottom" constant="163" id="Zyk-eq-Svt"/>
                             <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="5LP-De-2H9" secondAttribute="bottom" id="dSX-HI-Wis"/>
@@ -597,6 +609,7 @@
                             <constraint firstItem="hyO-SC-nr6" firstAttribute="leading" secondItem="xHA-KR-3ja" secondAttribute="leadingMargin" id="lN3-v8-v8j"/>
                             <constraint firstAttribute="trailing" secondItem="5LP-De-2H9" secondAttribute="trailing" id="mhU-iE-Iw5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hyO-SC-nr6" secondAttribute="trailing" id="nRf-Nz-kRI"/>
+                            <constraint firstItem="bXa-yh-2IF" firstAttribute="top" secondItem="xHA-KR-3ja" secondAttribute="top" id="qgR-1k-crD"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -605,11 +618,13 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="errorButton" destination="bXa-yh-2IF" id="0N3-E6-avT"/>
                         <outlet property="imageToDisplay" destination="VRd-iS-maD" id="kEY-Cd-dAc"/>
                         <outlet property="prizeLabel" destination="hyO-SC-nr6" id="qDa-fk-HI9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1g6-EA-t6l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="23G-R9-L5P" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3599" y="-1024"/>
         </scene>
@@ -911,6 +926,7 @@
         <image name="Form-txt-title" width="730" height="158"/>
         <image name="Lose-2eme-chance" width="450" height="77"/>
         <image name="Lose-2eme-chance-highlight" width="450" height="77"/>
+        <image name="Medicis-MAIL" width="180" height="53"/>
         <image name="Picto-jeu" width="216" height="190"/>
         <image name="Picto-jeu-vertical" width="478" height="488"/>
         <image name="Start-button-start" width="346" height="90"/>

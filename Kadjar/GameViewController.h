@@ -22,6 +22,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *imageToDisplay;
 @property (nonatomic, weak) IBOutlet UILabel *prizeLabel;
 
+@property (nonatomic, weak) IBOutlet UIButton *errorButton;
+
 
 @property (nonatomic, strong) NSString *currentGameCode;
 @property (nonatomic, strong) NSString *qrCodeString;
@@ -30,6 +32,7 @@
 @property (nonatomic, strong) DBRecordClient *currentPlayer;
 
 @property bool isAnewCode;
+@property bool isAbadCode;
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSArray *arrClientInfo;
@@ -42,6 +45,7 @@
 
 -(void)checkPrize;
 -(void)initPrizeArray;
+-(NSInteger)CheckPrizeWithThatPercentToWinOld:(int)winThreshold;
 -(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold;
 
 @end
