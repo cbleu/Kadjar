@@ -10,6 +10,7 @@
 
 @interface AppDelegate ()
 
+
 @end
 
 @implementation AppDelegate
@@ -66,5 +67,46 @@ NSString *kPrize05 = @"Lampe Torche";
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+
+
+-(DBRecordClient*)isGameCodeExist: (NSString*) code
+{
+    // Initialize the dbManager property.
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"clientInfoDB.sql"];
+    
+    // Form the query.
+    NSString *query = [NSString stringWithFormat:@"select * from clientInfo where gameCode = '%@'", code];
+    NSArray *resultQuery;
+    
+    resultQuery = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+    if ([resultQuery count ] > 0){
+        DBRecordClient *record = [[DBRecordClient alloc] initWithObject:resultQuery[0]];
+        NSLog(@"QR Code déjà scanné: %@, %@", record.gameCode, record.prize);
+//        NSLog(@"QR Code déjà scanné: %@, %@", [resultQuery[0] objectAtIndex:5], [resultQuery[0] objectAtIndex:6]);
+        if([[resultQuery[0] objectAtIndex:6] isEqualToString:@""]){
+//            return @"LOSE";
+            record.prize = @"LOSE";
+        }
+//        return [resultQuery[0] objectAtIndex:6];
+        return record;
+    }else{
+        // NEw QR Code
+        return nil;
+    }
+}
+
+-(void)eraseAllClients{
+    // Form the query.
+    NSString *query = @"delete from clientInfo";
+    
+    // Execute the query.
+    [self.dbManager executeQuery:query];
+    
+}
+
+
 
 @end

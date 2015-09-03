@@ -21,6 +21,8 @@
 @synthesize txtLastname;
 @synthesize txtEmail;
 @synthesize txtGSM;
+@synthesize gameCode;
+@synthesize newCode;
 
 
 - (void)viewDidLoad
@@ -38,6 +40,14 @@
 	
 	// Initialize the dbManager object.
 	self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"clientInfoDB.sql"];
+    
+//    _currentPlayer = [[DBRecordClient alloc] init];
+    
+    self.txtFirstname.text = _currentPlayer.nom;
+    self.txtLastname.text = _currentPlayer.prenom;
+    self.txtEmail.text = _currentPlayer.email;
+    self.txtGSM.text = _currentPlayer.gsm;
+    
 	
     [self registerForKeyboardNotifications];
 }
@@ -114,7 +124,11 @@
 	
 	// Prepare the query string.
 	NSString *query;
-	query = [NSString stringWithFormat:@"insert into clientInfo values(null, '%@', '%@', '%@', '%@')", self.txtFirstname.text, self.txtLastname.text, self.txtEmail.text, self.txtGSM.text];
+    if(self.newCode){
+        query = [NSString stringWithFormat:@"insert into clientInfo values(null, '%@', '%@', '%@', '%@', '%@', '%@')", self.txtFirstname.text, self.txtLastname.text, self.txtEmail.text, self.txtGSM.text, self.gameCode, self.prizeWinned];
+    }else{
+        query = [NSString stringWithFormat:@"update clientInfo Set firstname = '%@', lastname = '%@', email = '%@', gsm = '%@' where clientInfoID = %d", self.txtFirstname.text, self.txtLastname.text, self.txtEmail.text, self.txtGSM.text, self.currentPlayer.clientInfoID];
+    }
 	
 	// Execute the query.
 	[self.dbManager executeQuery:query];
@@ -141,6 +155,17 @@
 //		self.buttonSend.enabled = NO;
 //	}
 //}
+
+
+- (IBAction) NoButtonPress:(id)sender
+{
+    [self saveInfo:self];
+
+    [self performSegueWithIdentifier:@"unwindToGameStartFromFormSegue" sender:self];
+
+}
+
+
 
 #pragma mark - Private method implementation
 

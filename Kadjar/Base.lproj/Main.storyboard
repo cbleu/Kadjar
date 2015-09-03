@@ -534,46 +534,66 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="ECRAN-background" translatesAutoresizingMaskIntoConstraints="NO" id="oDP-It-xPv">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufq-Er-Nea">
-                                <rect key="frame" x="96" y="459" width="488" height="121"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Picto-jeu" translatesAutoresizingMaskIntoConstraints="NO" id="ahM-7x-qAN">
+                                <rect key="frame" x="368" y="20" width="216" height="190"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Win-txt" translatesAutoresizingMaskIntoConstraints="NO" id="VRd-iS-maD">
+                                <rect key="frame" x="72" y="171" width="473" height="359"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="206" id="rY2-MI-vSk"/>
+                                    <constraint firstAttribute="height" constant="359" id="2rJ-nZ-wBu"/>
                                 </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyO-SC-nr6">
+                                <rect key="frame" x="64" y="340" width="473" height="97"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="97" id="HyG-0R-sRf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufq-Er-Nea">
+                                <rect key="frame" x="32" y="432" width="552" height="148"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="Lose-2eme-chance">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" image="Lose-2eme-chance-highlight"/>
                                 <connections>
-                                    <segue destination="dSu-97-mPy" kind="showDetail" id="laj-DY-TBu"/>
+                                    <segue destination="dSu-97-mPy" kind="showDetail" identifier="segueFromeWinToForm" id="laj-DY-TBu"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Picto-jeu" translatesAutoresizingMaskIntoConstraints="NO" id="ahM-7x-qAN">
-                                <rect key="frame" x="368" y="20" width="216" height="190"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Win-txt" translatesAutoresizingMaskIntoConstraints="NO" id="VRd-iS-maD">
-                                <rect key="frame" x="64" y="28" width="473" height="359"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="VRd-iS-maD" secondAttribute="trailing" constant="39" id="1Jq-4e-04I"/>
                             <constraint firstItem="oDP-It-xPv" firstAttribute="top" secondItem="xHA-KR-3ja" secondAttribute="top" id="6Av-I6-Rhu"/>
-                            <constraint firstAttribute="bottom" secondItem="ufq-Er-Nea" secondAttribute="bottom" constant="20" symbolic="YES" id="6Iz-cD-abb"/>
-                            <constraint firstItem="VRd-iS-maD" firstAttribute="leading" secondItem="xHA-KR-3ja" secondAttribute="leadingMargin" constant="7" id="8wn-DN-aRX"/>
+                            <constraint firstItem="ufq-Er-Nea" firstAttribute="trailing" secondItem="xHA-KR-3ja" secondAttribute="trailingMargin" id="6in-sC-8Lr"/>
+                            <constraint firstItem="VRd-iS-maD" firstAttribute="centerX" secondItem="ufq-Er-Nea" secondAttribute="centerX" constant="-15.5" id="93t-Lz-lap"/>
                             <constraint firstItem="ahM-7x-qAN" firstAttribute="trailing" secondItem="xHA-KR-3ja" secondAttribute="trailingMargin" id="AEj-CN-TRe"/>
-                            <constraint firstItem="VRd-iS-maD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KQd-PE-mdg" secondAttribute="bottom" constant="60" id="GIS-3C-49r"/>
+                            <constraint firstItem="ufq-Er-Nea" firstAttribute="top" secondItem="VRd-iS-maD" secondAttribute="bottom" priority="750" id="Br8-v0-CYE"/>
                             <constraint firstAttribute="trailing" secondItem="oDP-It-xPv" secondAttribute="trailing" id="HIo-G3-DNO"/>
-                            <constraint firstItem="ufq-Er-Nea" firstAttribute="top" secondItem="VRd-iS-maD" secondAttribute="bottom" constant="40" id="KFc-0l-7Kk"/>
-                            <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="VRd-iS-maD" secondAttribute="bottom" constant="107" id="Om5-m2-uLp"/>
+                            <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="ufq-Er-Nea" secondAttribute="bottom" constant="20" id="LIc-l2-doo"/>
+                            <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="ufq-Er-Nea" secondAttribute="bottom" constant="20" id="Pz8-89-Xss"/>
                             <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="oDP-It-xPv" secondAttribute="bottom" id="QtO-Kn-Sf6"/>
                             <constraint firstItem="ahM-7x-qAN" firstAttribute="top" secondItem="KQd-PE-mdg" secondAttribute="bottom" id="XP1-RQ-oTo"/>
+                            <constraint firstItem="YKH-MW-glc" firstAttribute="top" secondItem="hyO-SC-nr6" secondAttribute="bottom" constant="163" id="Zyk-eq-Svt"/>
+                            <constraint firstItem="VRd-iS-maD" firstAttribute="leading" secondItem="xHA-KR-3ja" secondAttribute="leadingMargin" constant="56" id="ez4-ZH-93g"/>
                             <constraint firstItem="oDP-It-xPv" firstAttribute="leading" secondItem="xHA-KR-3ja" secondAttribute="leading" id="fq0-Pz-Idg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="VRd-iS-maD" secondAttribute="trailing" constant="88" id="nh2-5z-KcQ"/>
-                            <constraint firstItem="ufq-Er-Nea" firstAttribute="trailing" secondItem="ahM-7x-qAN" secondAttribute="trailing" id="rNj-6a-iOj"/>
+                            <constraint firstItem="ufq-Er-Nea" firstAttribute="trailing" secondItem="xHA-KR-3ja" secondAttribute="trailingMargin" id="hS8-hN-LJc"/>
+                            <constraint firstItem="VRd-iS-maD" firstAttribute="top" secondItem="KQd-PE-mdg" secondAttribute="bottom" constant="151" id="jDv-xS-piP"/>
+                            <constraint firstItem="hyO-SC-nr6" firstAttribute="leading" secondItem="xHA-KR-3ja" secondAttribute="leadingMargin" id="lN3-v8-v8j"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hyO-SC-nr6" secondAttribute="trailing" id="nRf-Nz-kRI"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="93t-Lz-lap"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="imageToDisplay" destination="VRd-iS-maD" id="kEY-Cd-dAc"/>
+                        <outlet property="prizeLabel" destination="hyO-SC-nr6" id="qDa-fk-HI9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1g6-EA-t6l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -645,7 +665,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="n39-L2-O1K"/>
@@ -665,7 +685,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="phonePad" returnKeyType="join" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="phonePad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="exQ-CU-xZA"/>
@@ -706,8 +726,9 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="NoButtonPress:" destination="dSu-97-mPy" eventType="touchUpInside" id="d1V-r0-gUb"/>
                                             <action selector="unwindToGameStart:" destination="ONW-gH-8Nd" eventType="touchUpInside" id="sAP-uJ-7xz"/>
-                                            <segue destination="aP3-BI-UvU" kind="unwind" unwindAction="unwindToGameStart:" id="B9n-RD-ET3"/>
+                                            <segue destination="aP3-BI-UvU" kind="unwind" identifier="unwindToGameStartFromFormSegue" unwindAction="unwindToGameStart:" id="B9n-RD-ET3"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Picto-jeu" translatesAutoresizingMaskIntoConstraints="NO" id="C1s-VG-OY7">

@@ -186,7 +186,7 @@
             
             while(sqlite3_step(compiledStatement) == SQLITE_ROW) {
                 //this assumes that there are two rows in your database you want to get data from
-                csv = [csv stringByAppendingFormat: @"%@,%@,%@,%@\n", [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)], [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)], [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 3)], [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 4)]];
+                csv = [csv stringByAppendingFormat: @"%@,%@,%@,%@,%@,%@\n", [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)], [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)], [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 3)], [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 4)], [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 5)], [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 6)]];
             }
             
             sqlite3_finalize(compiledStatement);

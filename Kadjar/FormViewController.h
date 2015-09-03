@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DBManager.h"
+#import "DBRecordClient.h"
 
 @interface FormViewController : UIViewController <UITextFieldDelegate>
 
@@ -18,6 +19,14 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtGSM;
+
+@property (strong, nonatomic) NSString *gameCode;
+@property (strong, nonatomic) NSString *prizeWinned;
+
+@property bool newCode;
+
+@property (nonatomic, strong) DBRecordClient *currentPlayer;
+
 
 //@property (weak, nonatomic) IBOutlet UISwitch *switchClub;
 
@@ -34,6 +43,7 @@
 @property (nonatomic, weak) UITextField *activeField;
 
 - (IBAction)saveInfo:(id)sender;
+- (IBAction) NoButtonPress:(id)sender;
 
 //- (IBAction)switchPressedAction:(id)sender;
 -(void)registerForKeyboardNotifications;

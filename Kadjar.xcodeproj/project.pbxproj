@@ -31,6 +31,7 @@
 		DB69CF991B977FAD0009CC24 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB69CF981B977FAD0009CC24 /* SettingsTableViewController.m */; };
 		DB69CF9C1B9799610009CC24 /* PrizesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB69CF9B1B9799610009CC24 /* PrizesTableViewController.m */; };
 		DB69CF9F1B980A2A0009CC24 /* PrizeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB69CF9E1B980A2A0009CC24 /* PrizeTableViewCell.m */; };
+		DB7121631B989AC20058409F /* DBRecordClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7121621B989AC20058409F /* DBRecordClient.m */; };
 		DB76F2FA1B9461AD00A3927B /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76F2F91B9461AD00A3927B /* GameViewController.m */; };
 		DB76F2FD1B947E0300A3927B /* StepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76F2FC1B947E0300A3927B /* StepViewController.m */; };
 		DB76F2FF1B950AB000A3927B /* StartScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76F2FE1B950AB000A3927B /* StartScanViewController.m */; };
@@ -91,6 +92,8 @@
 		DB69CF9B1B9799610009CC24 /* PrizesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrizesTableViewController.m; sourceTree = "<group>"; };
 		DB69CF9D1B980A2A0009CC24 /* PrizeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrizeTableViewCell.h; sourceTree = "<group>"; };
 		DB69CF9E1B980A2A0009CC24 /* PrizeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrizeTableViewCell.m; sourceTree = "<group>"; };
+		DB7121611B989AC20058409F /* DBRecordClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRecordClient.h; sourceTree = "<group>"; };
+		DB7121621B989AC20058409F /* DBRecordClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRecordClient.m; sourceTree = "<group>"; };
 		DB76F2F81B9461AD00A3927B /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		DB76F2F91B9461AD00A3927B /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		DB76F2FB1B947E0300A3927B /* StepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepViewController.h; sourceTree = "<group>"; };
@@ -192,6 +195,8 @@
 				DB25D8DA1B9839E90046E86B /* EmailTableViewCell.m */,
 				DB25D8DC1B984F180046E86B /* GameStartViewController.h */,
 				DB25D8DD1B984F180046E86B /* GameStartViewController.m */,
+				DB7121611B989AC20058409F /* DBRecordClient.h */,
+				DB7121621B989AC20058409F /* DBRecordClient.m */,
 			);
 			path = Kadjar;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 			files = (
 				DB69CF9F1B980A2A0009CC24 /* PrizeTableViewCell.m in Sources */,
 				DB76F2FD1B947E0300A3927B /* StepViewController.m in Sources */,
+				DB7121631B989AC20058409F /* DBRecordClient.m in Sources */,
 				DB25D8DB1B9839E90046E86B /* EmailTableViewCell.m in Sources */,
 				DB110ECA1B8F19DF005F1298 /* ScanViewController.m in Sources */,
 				DB110EFC1B8F1B34005F1298 /* StartViewController.m in Sources */,

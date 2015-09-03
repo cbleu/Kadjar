@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBManager.h"
+#import "DBRecordClient.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -30,6 +32,12 @@ extern NSString *kPrize05;
 
 
 //extern NSDictionary *Prizedictionary;
+
+
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSArray *arrClientInfo;
+
+-(DBRecordClient *)isGameCodeExist: (NSString*)code;
 
 
 @end

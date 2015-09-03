@@ -7,13 +7,14 @@
 //
 
 #import "GameViewController.h"
-
+#import "AppDelegate.h"
+#import "FormViewController.h"
 
 @implementation GameViewController
 
 @synthesize qrCodeString;
 @synthesize imageToDisplay;
-
+@synthesize prizeLabel;
 
 - (void)viewDidLoad
 {
@@ -39,34 +40,75 @@
 }
 
 
+//-(void)initPrizeArray
+//{
+//    
+//    NSMutableDictionary *lot01 =[NSMutableDictionary
+//                                 dictionaryWithDictionary: @{
+//                                                             @"name": @"Casquette",
+//                                                             @"stock": [NSNumber numberWithInt:5]
+//                                                             }];
+//    NSMutableDictionary *lot02 = [NSMutableDictionary
+//                                  dictionaryWithDictionary:@{
+//                                                             @"name": @"T-Shirt",
+//                                                             @"stock": [NSNumber numberWithInt:5]
+//                                                             }];
+//    NSMutableDictionary *lot03 = [NSMutableDictionary
+//                                  dictionaryWithDictionary:@{
+//                                                             @"name": @"Stylo",
+//                                                             @"stock": [NSNumber numberWithInt:5]
+//                                                             }];
+//    NSMutableDictionary *lot04 = [NSMutableDictionary
+//                                  dictionaryWithDictionary:@{
+//                                                             @"name": @"Porte-Clé",
+//                                                             @"stock": [NSNumber numberWithInt:5]
+//                                                             }];
+//    _prizeArray = [NSMutableArray arrayWithObjects:
+//                   lot01, lot02, lot03, lot04, nil];
+//    
+//    
+//}
+
 -(void)initPrizeArray
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
+    NSMutableDictionary *lot00 = [NSMutableDictionary
+                                  dictionaryWithDictionary:@{
+                                                             @"name": kPrize00,
+                                                             @"stock": [NSNumber numberWithInt:[defaults integerForKey: kPrize00]]
+                                                             }];
     NSMutableDictionary *lot01 =[NSMutableDictionary
                                  dictionaryWithDictionary: @{
-                                                             @"name": @"Casquette",
-                                                             @"stock": [NSNumber numberWithInt:5]
+                                                             @"name": kPrize01,
+                                                             @"stock": [NSNumber numberWithInt:[defaults integerForKey: kPrize01]]
                                                              }];
     NSMutableDictionary *lot02 = [NSMutableDictionary
                                   dictionaryWithDictionary:@{
-                                                             @"name": @"T-Shirt",
-                                                             @"stock": [NSNumber numberWithInt:5]
+                                                             @"name": kPrize02,
+                                                             @"stock": [NSNumber numberWithInt:[defaults integerForKey: kPrize02]]
                                                              }];
     NSMutableDictionary *lot03 = [NSMutableDictionary
                                   dictionaryWithDictionary:@{
-                                                             @"name": @"Stylo",
-                                                             @"stock": [NSNumber numberWithInt:5]
+                                                             @"name": kPrize03,
+                                                             @"stock": [NSNumber numberWithInt:[defaults integerForKey: kPrize03]]
                                                              }];
     NSMutableDictionary *lot04 = [NSMutableDictionary
                                   dictionaryWithDictionary:@{
-                                                             @"name": @"Porte-Clé",
-                                                             @"stock": [NSNumber numberWithInt:5]
+                                                             @"name": kPrize04,
+                                                             @"stock": [NSNumber numberWithInt:[defaults integerForKey: kPrize04]]
+                                                             }];
+    NSMutableDictionary *lot05 = [NSMutableDictionary
+                                  dictionaryWithDictionary:@{
+                                                             @"name": kPrize05,
+                                                             @"stock": [NSNumber numberWithInt:[defaults integerForKey: kPrize05]]
                                                              }];
     _prizeArray = [NSMutableArray arrayWithObjects:
-                   lot01, lot02, lot03, lot04, nil];
+                   lot00, lot01, lot02, lot03, lot04, lot05, nil];
     
     
 }
+
 
 -(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold
 {
@@ -105,39 +147,92 @@
 -(void)checkPrize
 {
     NSString *resultStr;
+    NSInteger index;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    // Check prize
-    NSInteger index = [self CheckPrizeWithThatPercentToWin:50];
     
-    if (index >= 0){
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    DBRecordClient *result = [[DBRecordClient alloc] init];
+    _currentPlayer= [[DBRecordClient alloc] init];
+    _currentPlayer = [appDelegate isGameCodeExist: [self getGameCodeFrom: self.qrCodeString]];
+    
+    if([_currentPlayer.prize isEqualToString: @""]){
+//    if((NSString*)[result objectAtIndex:6] isEqualToString: @""]){
+        NSLog(@"Nouveau Code");
         
-        resultStr = [NSString stringWithFormat:@"Votre lot est: %@ stock: %@", _prizeArray[index][@"name"], _prizeArray[index][@"stock"]];
+        _isAnewCode = YES;
         
-        NSLog(@"We Win something: %@ !", resultStr);
+        // Check prize
+        index = [self CheckPrizeWithThatPercentToWin: [defaults integerForKey: kSettingsWinPercentKey]];
+        if (index >= 0){
+            
+            resultStr = [NSString stringWithFormat:@"Votre lot est: %@ stock: %@", _prizeArray[index][@"name"], _prizeArray[index][@"stock"]];
+            NSString *strLabel = [NSString stringWithFormat:@"Votre lot gagnant est: %@", _prizeArray[index][@"name"]];
+           
+            NSLog(@"We Win something: %@ !", resultStr);
+            _prizeWinned = _prizeArray[index][@"name"];
+            
+            [prizeLabel setText: strLabel];
 
-        UIImage *image = [UIImage imageNamed:@"Win-txt"];
-        [imageToDisplay setImage:image];
+            UIImage *image = [UIImage imageNamed:@"Win-txt"];
+            [imageToDisplay setImage:image];
+            
+            // If the audio player is not nil, then play the sound effect.
+            if (_audioPlayerWin) {
+                [_audioPlayerWin play];
+            }
 
-        // If the audio player is not nil, then play the sound effect.
-        if (_audioPlayerWin) {
-            [_audioPlayerWin play];
+        }else{
+            resultStr = [NSString stringWithFormat:@"Désolé vous n'avez pas gagné cette fois !"];
+            NSLog(@"We Loose: %@", resultStr);
+            _prizeWinned = @"";
+            
+            [prizeLabel setText:@"Vous n'avez pas gagné avec ce bon"];
+
+            UIImage *image = [UIImage imageNamed:@"Lose-txt"];
+            [imageToDisplay setImage:image];
+            
+            if (_audioPlayerLose) {
+                [_audioPlayerLose play];
+            }
+            
         }
-
-//        [self performSelector:@selector(displayWinView) withObject:self afterDelay:0.2 ];
-
-    
     }else{
-        resultStr = [NSString stringWithFormat:@"Désolé vous n'avez pas gagné cette fois !"];
-        NSLog(@"We Loose: %@", resultStr);
+        NSLog(@"Code connu");
+        
+        _isAnewCode = NO;
+        
+        if([_currentPlayer.prize isEqualToString:@"LOSE"]){
+            NSLog(@"We Loose: %@", resultStr);
+            _prizeWinned = @"";
+            
+            [prizeLabel setText:@"Vous n'avez pas gagné avec ce bon"];
+            
+            UIImage *image = [UIImage imageNamed:@"Lose-txt"];
+            [imageToDisplay setImage:image];
+            
+            if (_audioPlayerLose) {
+                [_audioPlayerLose play];
+            }
+            
+        }else{
+            NSString *strLabel = [NSString stringWithFormat:@"Votre lot gagnant est: %@", _currentPlayer.prize];
+            NSLog(@"%@",strLabel);
+            
+            _prizeWinned = @"";
+            
+            [prizeLabel setText: strLabel];
 
-        UIImage *image = [UIImage imageNamed:@"Lose-txt"];
-        [imageToDisplay setImage:image];
-        
-        if (_audioPlayerLose) {
-            [_audioPlayerLose play];
+            UIImage *image = [UIImage imageNamed:@"Win-txt"];
+            [imageToDisplay setImage:image];
+            
+            if (_audioPlayerWin) {
+                [_audioPlayerWin play];
+            }
         }
-        
     }
+    
+    
     
     // Display Prize
     //    [_lblTitle performSelectorOnMainThread:@selector(setText:) withObject:resultStr waitUntilDone:NO];
@@ -196,6 +291,18 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"segueFromeWinToForm"]) {
+        FormViewController *destViewController = segue.destinationViewController;
+        
+        NSString *gamecode = [self getGameCodeFrom: self.qrCodeString];
+        destViewController.gameCode = gamecode;
+        destViewController.prizeWinned = _prizeWinned;
+        destViewController.newCode = _isAnewCode;
+        destViewController.currentPlayer = _currentPlayer;
+    }
+}
 
 
 

@@ -83,7 +83,8 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"segueFromScanToTransition"]) {
+//    if ([segue.identifier isEqualToString:@"segueFromScanToTransition"]) {
+    if ([segue.identifier isEqualToString:@"segueFromTransitionToWin"]) {
         GameViewController *destViewController = segue.destinationViewController;
         destViewController.qrCodeString = self.qrCodeString;
     }

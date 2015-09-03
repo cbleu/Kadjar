@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-
+#import "DBManager.h"
+#import "DBRecordClient.h"
 
 @interface GameViewController : UIViewController
 
@@ -19,19 +20,28 @@
 @property (nonatomic, strong) AVAudioPlayer *audioPlayerLose;
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageToDisplay;
+@property (nonatomic, weak) IBOutlet UILabel *prizeLabel;
 
 
 @property (nonatomic, strong) NSString *currentGameCode;
 @property (nonatomic, strong) NSString *qrCodeString;
+@property (nonatomic, strong) NSString *prizeWinned;
 
+@property (nonatomic, strong) DBRecordClient *currentPlayer;
+
+@property bool isAnewCode;
+
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSArray *arrClientInfo;
 
 
 -(void)loadWinSound;
 -(void)loadLoseSound;
 
+-(NSString*)getGameCodeFrom: (NSString*)scanCode;
+
 -(void)checkPrize;
 -(void)initPrizeArray;
 -(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold;
--(NSString*)getGameCodeFrom: (NSString*)scanCode;
 
 @end
