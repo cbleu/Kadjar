@@ -102,9 +102,18 @@
     AVCaptureDevice *captureDevice = nil;
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     for(AVCaptureDevice *camera in devices) {
-        if([camera position] == AVCaptureDevicePositionFront) { // is front camera
-            captureDevice = camera;
-            break;
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+            NSLog(@"IPAD");
+            if([camera position] == AVCaptureDevicePositionFront) { // is front camera
+                captureDevice = camera;
+                break;
+            }
+        }else{
+            NSLog(@"IPHONE");
+            if([camera position] == AVCaptureDevicePositionBack) { // is Back camera
+                captureDevice = camera;
+                break;
+            }
         }
     }
 

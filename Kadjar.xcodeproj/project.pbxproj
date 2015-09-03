@@ -24,7 +24,6 @@
 		DB110EF91B8F1AE4005F1298 /* DismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EF51B8F1AE4005F1298 /* DismissSegue.m */; };
 		DB110EFC1B8F1B34005F1298 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB110EFB1B8F1B34005F1298 /* StartViewController.m */; };
 		DB110F041B8F4226005F1298 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB110F031B8F4226005F1298 /* beep.mp3 */; };
-		DB110F061B8F580B005F1298 /* ECRAN3BD.mov in Resources */ = {isa = PBXBuildFile; fileRef = DB110F051B8F580B005F1298 /* ECRAN3BD.mov */; };
 		DB25D8DB1B9839E90046E86B /* EmailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25D8DA1B9839E90046E86B /* EmailTableViewCell.m */; };
 		DB25D8DE1B984F180046E86B /* GameStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25D8DD1B984F180046E86B /* GameStartViewController.m */; };
 		DB69CF991B977FAD0009CC24 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB69CF981B977FAD0009CC24 /* SettingsTableViewController.m */; };
@@ -80,7 +79,6 @@
 		DB110EFA1B8F1B34005F1298 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		DB110EFB1B8F1B34005F1298 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		DB110F031B8F4226005F1298 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
-		DB110F051B8F580B005F1298 /* ECRAN3BD.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = ECRAN3BD.mov; sourceTree = "<group>"; };
 		DB25D8D91B9839E90046E86B /* EmailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailTableViewCell.h; sourceTree = "<group>"; };
 		DB25D8DA1B9839E90046E86B /* EmailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailTableViewCell.m; sourceTree = "<group>"; };
 		DB25D8DC1B984F180046E86B /* GameStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStartViewController.h; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 				DB76F2FC1B947E0300A3927B /* StepViewController.m */,
 				DB110ECB1B8F19DF005F1298 /* Main.storyboard */,
 				DB110ECE1B8F19DF005F1298 /* Images.xcassets */,
-				DB110F051B8F580B005F1298 /* ECRAN3BD.mov */,
 				DB76F3011B95BC0500A3927B /* ECRAN3BD-audio.mov */,
 				DB7121641B98F8780058409F /* Drum-Roll-Lose.mp3 */,
 				DB7121651B98F8780058409F /* Drum-Roll-Win.mp3 */,
@@ -316,7 +313,6 @@
 				DB7121661B98F8780058409F /* Drum-Roll-Lose.mp3 in Resources */,
 				DB110ECD1B8F19DF005F1298 /* Main.storyboard in Resources */,
 				DB110F041B8F4226005F1298 /* beep.mp3 in Resources */,
-				DB110F061B8F580B005F1298 /* ECRAN3BD.mov in Resources */,
 				DB110ED21B8F19DF005F1298 /* LaunchScreen.xib in Resources */,
 				DB110ECF1B8F19DF005F1298 /* Images.xcassets in Resources */,
 				DB110EF71B8F1AE4005F1298 /* clientInfoDB.sql in Resources */,
