@@ -14,9 +14,34 @@
 
 @implementation AppDelegate
 
+NSString *kSettingsWinPercentKey = @"win-percent";
+NSString *kSettingsDefaultEmail = @"Default email";
+NSString *kPrize00 = @"T-shirt";
+NSString *kPrize01 = @"Coffret KDO Pays";
+NSString *kPrize02 = @"Pass Makes Aventures pour 1 adulte et 1 enfant";
+NSString *kPrize03 = @"Sac à dos";
+NSString *kPrize04 = @"Gourdes";
+NSString *kPrize05 = @"Lampe Torche";
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithInteger:50], kSettingsWinPercentKey,
+                                 @"", kSettingsDefaultEmail,
+                                 [NSNumber numberWithInteger:0], kPrize01,
+                                 [NSNumber numberWithInteger:0], kPrize02,
+                                 [NSNumber numberWithInteger:0], kPrize03,
+                                 [NSNumber numberWithInteger:0], kPrize04,
+                                 [NSNumber numberWithInteger:0], kPrize05,
+                                 nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    
+//    NSDictionary *Prizedictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                                     @"v1",@"k1",
+//                                     @"v2",@"k2",
+//                                     nil];
     return YES;
 }
 

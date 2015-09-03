@@ -17,6 +17,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import "DBManager.h"
 
 
 @interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate>
@@ -25,12 +26,24 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonErase;
 
+@property (nonatomic, strong) DBManager *dbManager;
 
-- (IBAction)deleteDataBase:(id)sender;
+@property (nonatomic, strong) NSArray *arrClientInfo;
 
-- (IBAction)exportDatabase:(id)sender;
 
-- (IBAction)switchPressedAction:(id)sender;
+- (IBAction)unwindToStart:(UIStoryboardSegue *)unwindSegue;
+
+- (IBAction)jumpToGameStart:(id)sender;
+
+-(void)loadData;
+
+-(void)eraseAllData;
+
+//- (IBAction)deleteDataBase:(id)sender;
+
+- (IBAction)exportAndMailDatabase:(id)sender;
+
+//- (IBAction)switchPressedAction:(id)sender;
 
 @end
 

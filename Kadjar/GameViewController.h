@@ -15,7 +15,8 @@
 
 @property (nonatomic, strong) NSMutableArray *prizeArray;
 
-@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayerWin;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayerLose;
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageToDisplay;
 
@@ -25,8 +26,8 @@
 
 
 
-
--(void)loadBeepSound;
+-(void)loadWinSound;
+-(void)loadLoseSound;
 
 -(void)checkPrize;
 -(void)initPrizeArray;

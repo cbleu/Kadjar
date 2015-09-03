@@ -32,7 +32,7 @@
 {
     NSLog(@"Retour vers l'accueil !");
 //    [self performSelector:@selector(actionButton) withObject:self afterDelay:5.0 ];
-    [self performSegueWithIdentifier:@"unwindToStartSegue" sender:self];
+    [self performSegueWithIdentifier:@"unwindToGameStartSegue" sender:self];
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

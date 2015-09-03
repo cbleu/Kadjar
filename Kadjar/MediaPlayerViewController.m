@@ -73,9 +73,9 @@
     NSLog(@"End media");
 
     // If the audio player is not nil, then play the sound effect.
-    if (_audioPlayer) {
-        [_audioPlayer play];
-    }
+//    if (_audioPlayer) {
+//        [_audioPlayer play];
+//    }
 
 //    [self dismissViewControllerAnimated:YES completion:nil];
     [self performSegueWithIdentifier:@"segueFromTransitionToWin" sender:self];

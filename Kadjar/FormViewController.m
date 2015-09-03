@@ -96,9 +96,9 @@
 			unacceptedInput = [[NSCharacterSet characterSetWithCharactersInString:[ALPHA_NUMERIC stringByAppendingString:@".-_~@"]] invertedSet];
 		}
     } else if (textField == self.txtFirstname || textField == self.txtLastname) {
-        unacceptedInput = [[NSCharacterSet characterSetWithCharactersInString:[ALPHA stringByAppendingString:FRENCH]] invertedSet];
+        unacceptedInput = [[NSCharacterSet characterSetWithCharactersInString:[ALPHA stringByAppendingString:FRENCH @" "]] invertedSet];
     } else if (textField == self.txtGSM) {
-        unacceptedInput = [[NSCharacterSet characterSetWithCharactersInString:[NUMERIC stringByAppendingString:@".-()+"]] invertedSet];
+        unacceptedInput = [[NSCharacterSet characterSetWithCharactersInString:[NUMERIC stringByAppendingString:@".-()+ "]] invertedSet];
 	} else {
 		unacceptedInput = [[NSCharacterSet illegalCharacterSet] invertedSet];
 	}

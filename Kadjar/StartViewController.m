@@ -8,21 +8,15 @@
 
 
 #import "StartViewController.h"
-#import "DBManager.h"
 #import "StepViewController.h"
 #import "FormViewController.h"
 
 @interface StartViewController ()
 
-@property (nonatomic, strong) DBManager *dbManager;
-
-@property (nonatomic, strong) NSArray *arrClientInfo;
-
--(void)loadData;
-
--(void)eraseAllData;
-
 @end
+
+
+
 
 @implementation StartViewController
 
@@ -48,13 +42,13 @@
 
 
 
-- (IBAction)deleteDataBase:(id)sender {
-    
-    [self eraseAllData];
-    
-}
+//- (IBAction)deleteDataBase:(id)sender {
+//    
+//    [self eraseAllData];
+//    
+//}
 
-- (IBAction)exportDatabase:(id)sender {
+- (IBAction)exportAndMailDatabase:(id)sender {
     
     // Export the database to CSV.
     [self.dbManager exportDBtoCSV];
@@ -62,15 +56,15 @@
     [self displayComposerSheet];
 }
 
--(IBAction) switchPressedAction:(id)sender {
-    
-    // Lock-unlock the erase button
-    if(self.switchErase.on){
-        self.buttonErase.enabled = YES;
-    }else{
-        self.buttonErase.enabled = NO;
-    }
-}
+//-(IBAction) switchPressedAction:(id)sender {
+//    
+//    // Lock-unlock the erase button
+//    if(self.switchErase.on){
+//        self.buttonErase.enabled = YES;
+//    }else{
+//        self.buttonErase.enabled = NO;
+//    }
+//}
 
 - (IBAction)unwindToStart:(UIStoryboardSegue *)unwindSegue
 {
@@ -84,7 +78,16 @@
     {
         NSLog(@"Coming from FormViewController!");
     }
+//    [self jumpToGameStart:self];
 }
+
+-(IBAction)jumpToGameStart:(id)sender
+{
+    // Now goto first screen of the game loop
+    [self performSegueWithIdentifier:@"segueToGameStartLoop" sender:self];
+    NSLog(@"Jump to First view of game");
+}
+
 
 #pragma mark - Private method implementation
 
@@ -136,7 +139,7 @@
     [picker addAttachmentData:fileData mimeType:@"text/csv" fileName:@"clientInfo.csv"];
     
     // Fill out the email body text
-    NSString *emailBody = @"Email d'export de l'application Nestle base Client Club";
+    NSString *emailBody = @"Email d'export de la base Client";
     [picker setMessageBody:emailBody isHTML:NO];
     
     [self presentViewController:picker animated:YES completion:nil];

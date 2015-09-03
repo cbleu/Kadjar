@@ -21,7 +21,8 @@
     // Do any additional setup after loading the view.
     
 //    // Begin loading the sound effect so to have it ready for playback when it's needed.
-//    [self loadBeepSound];
+    [self loadWinSound];
+    [self loadLoseSound];
 
     // Init Prizes array with stock
     [self initPrizeArray];
@@ -114,13 +115,13 @@
         
         NSLog(@"We Win something: %@ !", resultStr);
 
-        UIImage *image = [UIImage imageNamed:@"ECRAN5-gagne"];
+        UIImage *image = [UIImage imageNamed:@"Win-txt"];
         [imageToDisplay setImage:image];
 
-//        // If the audio player is not nil, then play the sound effect.
-//        if (_audioPlayer) {
-//            [_audioPlayer play];
-//        }
+        // If the audio player is not nil, then play the sound effect.
+        if (_audioPlayerWin) {
+            [_audioPlayerWin play];
+        }
 
 //        [self performSelector:@selector(displayWinView) withObject:self afterDelay:0.2 ];
 
@@ -129,13 +130,12 @@
         resultStr = [NSString stringWithFormat:@"Désolé vous n'avez pas gagné cette fois !"];
         NSLog(@"We Loose: %@", resultStr);
 
-        UIImage *image = [UIImage imageNamed:@"ECRAN5-dommage"];
+        UIImage *image = [UIImage imageNamed:@"Lose-txt"];
         [imageToDisplay setImage:image];
         
-//        // If the audio player is not nil, then play the sound effect.
-//        if (_audioPlayer) {
-//            [_audioPlayer play];
-//        }
+        if (_audioPlayerLose) {
+            [_audioPlayerLose play];
+        }
         
     }
     
@@ -145,25 +145,37 @@
 }
 
 
--(void)loadBeepSound
+-(void)loadWinSound
 {
-    // Get the path to the beep.mp3 file and convert it to a NSURL object.
     NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"montage-win" ofType:@"mp3"];
-//    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
     NSURL *beepURL = [NSURL URLWithString:beepFilePath];
-    
     NSError *error;
     
-    // Initialize the audio player object using the NSURL object previously set.
-    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
+    _audioPlayerWin = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
     if (error) {
         // If the audio player cannot be initialized then log a message.
-        NSLog(@"Could not play beep file.");
+        NSLog(@"Could not play file %@.", beepFilePath);
         NSLog(@"%@", [error localizedDescription]);
     }
     else{
         // If the audio player was successfully initialized then load it in memory.
-        [_audioPlayer prepareToPlay];
+        [_audioPlayerWin prepareToPlay];
+    }
+}
+
+-(void)loadLoseSound
+{
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"montage-lose" ofType:@"mp3"];
+    NSURL *beepURL = [NSURL URLWithString:beepFilePath];
+    NSError *error;
+    
+    _audioPlayerLose = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
+    if (error) {
+        NSLog(@"Could not play file %@.", beepFilePath);
+        NSLog(@"%@", [error localizedDescription]);
+    }
+    else{
+        [_audioPlayerLose prepareToPlay];
     }
 }
 
