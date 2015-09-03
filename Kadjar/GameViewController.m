@@ -156,8 +156,8 @@
     _currentPlayer= [[DBRecordClient alloc] init];
     _currentPlayer = [appDelegate isGameCodeExist: [self getGameCodeFrom: self.qrCodeString]];
     
-    if([_currentPlayer.prize isEqualToString: @""]){
-//    if((NSString*)[result objectAtIndex:6] isEqualToString: @""]){
+    if(! _currentPlayer){
+
         NSLog(@"Nouveau Code");
         
         _isAnewCode = YES;
@@ -206,7 +206,7 @@
             NSLog(@"We Loose: %@", resultStr);
             _prizeWinned = @"";
             
-            [prizeLabel setText:@"Vous n'avez pas gagné avec ce bon"];
+            [prizeLabel setText:@"Bon déjà scanné, vous n'avez pas gagné avec ce bon !"];
             
             UIImage *image = [UIImage imageNamed:@"Lose-txt"];
             [imageToDisplay setImage:image];
@@ -216,7 +216,7 @@
             }
             
         }else{
-            NSString *strLabel = [NSString stringWithFormat:@"Votre lot gagnant est: %@", _currentPlayer.prize];
+            NSString *strLabel = [NSString stringWithFormat:@"Bon déjà scanné, votre lot gagnant était: %@", _currentPlayer.prize];
             NSLog(@"%@",strLabel);
             
             _prizeWinned = @"";
