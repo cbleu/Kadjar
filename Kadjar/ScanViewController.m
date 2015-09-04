@@ -34,6 +34,10 @@
     _highlightView.layer.borderWidth = 3;
         
     [self startReading];
+    
+    //Start timer to stop scan
+    [self stopScanAfterDelay:10.0];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -179,10 +183,15 @@
     
     // Remove the video preview layer from the viewPreview view's layer.
     [_videoPreviewLayer removeFromSuperlayer];
+    
+    _isReading = NO;
 }
 
 -(void)stopDetection
 {
+    _isReading = NO;
+    [self cancelTimedSegue];
+    
     // If the audio player is not nil, then play the sound effect.
     if (_audioPlayer) {
         NSLog(@"Play beep file.");
@@ -234,6 +243,27 @@
     _isReading = NO;
 }
 
+
+-(void)stopScanAfterDelay:(double)delay
+{
+    NSLog(@"Timer to abort waiting scan initalised to: %1.0f", delay);
+    [self performSelector:@selector(actionStopScanSegue:) withObject:self afterDelay:delay ];
+    
+}
+
+
+
+-(IBAction)actionStopScanSegue:(id)sender
+{
+    NSLog(@"StopScan now!");
+    [self performSegueWithIdentifier:@"abortScanSegue" sender:self];
+}
+
+-(void) cancelTimedSegue
+{
+    [[self class] cancelPreviousPerformRequestsWithTarget:self];
+    NSLog(@"Timed Segue canceled !!!");
+}
 
 #pragma mark - navigation
 

@@ -47,7 +47,7 @@
     [_avPlayerViewcontroller.player play];
 
     // Begin loading the sound effect so to have it ready for playback when it's needed.
-    [self loadBeepSound];
+//    [self loadBeepSound];
 }
 
 
@@ -94,7 +94,7 @@
 -(void)loadBeepSound
 {
     // Get the path to the beep.mp3 file and convert it to a NSURL object.
-    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"montage-win" ofType:@"mp3"];
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"Drum-Roll-Win" ofType:@"mp3"];
     //    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
     NSURL *beepURL = [NSURL URLWithString:beepFilePath];
     
@@ -104,7 +104,7 @@
     _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
     if (error) {
         // If the audio player cannot be initialized then log a message.
-        NSLog(@"Could not play beep file.");
+        NSLog(@"Could not play file.");
         NSLog(@"%@", [error localizedDescription]);
     }
     else{

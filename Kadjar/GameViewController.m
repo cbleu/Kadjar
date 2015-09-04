@@ -204,7 +204,7 @@
         [defaults setInteger: [newstock integerValue] forKey: _prizeArray[fullIndex][@"name"]];
         
         NSLog(@"Filtered index: %d", prizeIndex);
-        NSLog(@"index dans _prizeArray: %d", fullIndex);
+        NSLog(@"index dans _prizeArray: %ld", (long)fullIndex);
 
         
         return fullIndex;
@@ -250,7 +250,7 @@
         _isAnewCode = YES;
         
         // Check prize
-        index = [self CheckPrizeWithThatPercentToWin: [defaults integerForKey: kSettingsWinPercentKey]];
+        index = [self CheckPrizeWithThatPercentToWin: (int)[defaults integerForKey: kSettingsWinPercentKey]];
         if (index >= 0){
             
             resultStr = [NSString stringWithFormat:@"Votre lot est: %@ stock: %@", _prizeArray[index][@"name"], _prizeArray[index][@"stock"]];

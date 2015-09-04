@@ -492,9 +492,11 @@
                     <connections>
                         <outlet property="viewPreview" destination="fZZ-Xe-HYk" id="CrA-UU-Z5J"/>
                         <segue destination="ubL-t4-0Yg" kind="showDetail" identifier="segueFromScanToTransition" id="TL7-Es-ETJ"/>
+                        <segue destination="Glr-z2-7u0" kind="unwind" identifier="abortScanSegue" unwindAction="unwindToGameStart:" id="FbB-xe-Vt7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQ8-TU-6hE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Glr-z2-7u0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1663" y="-1024"/>
         </scene>

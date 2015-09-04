@@ -30,11 +30,16 @@
 @property (nonatomic, strong) UIView *highlightView;
 
 
+-(IBAction)actionStopScanSegue:(id)sender;
+-(void) cancelTimedSegue;
+
 -(void)loadBeepSound;
 
 -(BOOL)startReading;
 -(void)stopReading;
 -(void)stopDetection;
+
+-(void)stopScanAfterDelay:(double)delay;
 
 
 @end

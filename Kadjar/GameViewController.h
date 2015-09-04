@@ -25,6 +25,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *errorButton;
 
 
+
 @property (nonatomic, strong) NSString *currentGameCode;
 @property (nonatomic, strong) NSString *qrCodeString;
 @property (nonatomic, strong) NSString *prizeWinned;
