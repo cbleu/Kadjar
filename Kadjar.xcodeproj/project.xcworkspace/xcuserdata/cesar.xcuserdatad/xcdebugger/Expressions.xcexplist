@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[FormViewController saveInfo:]:FormViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StartViewController loadData]:StartViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[FormViewController viewDidLoad]:FormViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DBManager loadDataFromDB:]:DBManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DBRecordClient initWithObject:]:DBRecordClient.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[GameViewController CheckPrizeWithThatPercentToWin:]:GameViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[key[@&quot;stock&quot;] integerValue]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[GameViewController prepareForSegue:sender:]:GameViewController.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
