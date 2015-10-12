@@ -8,19 +8,15 @@
 
 
 #import "StartViewController.h"
-#import "DBManager.h"
+#import "StepViewController.h"
+#import "FormViewController.h"
 
 @interface StartViewController ()
 
-@property (nonatomic, strong) DBManager *dbManager;
-
-@property (nonatomic, strong) NSArray *arrClientInfo;
-
--(void)loadData;
-
--(void)eraseAllData;
-
 @end
+
+
+
 
 @implementation StartViewController
 
@@ -46,13 +42,13 @@
 
 
 
-- (IBAction)deleteDataBase:(id)sender {
-    
-    [self eraseAllData];
-    
-}
+//- (IBAction)deleteDataBase:(id)sender {
+//    
+//    [self eraseAllData];
+//    
+//}
 
-- (IBAction)exportDatabase:(id)sender {
+- (IBAction)exportAndMailDatabase:(id)sender {
     
     // Export the database to CSV.
     [self.dbManager exportDBtoCSV];
@@ -60,15 +56,38 @@
     [self displayComposerSheet];
 }
 
--(IBAction) switchPressedAction:(id)sender {
+//-(IBAction) switchPressedAction:(id)sender {
+//    
+//    // Lock-unlock the erase button
+//    if(self.switchErase.on){
+//        self.buttonErase.enabled = YES;
+//    }else{
+//        self.buttonErase.enabled = NO;
+//    }
+//}
+
+- (IBAction)unwindToStart:(UIStoryboardSegue *)unwindSegue
+{
+    UIViewController* sourceViewController = unwindSegue.sourceViewController;
     
-    // Lock-unlock the erase button
-    if(self.switchErase.on){
-        self.buttonErase.enabled = YES;
-    }else{
-        self.buttonErase.enabled = NO;
+    if ([sourceViewController isKindOfClass:[StepViewController class]])
+    {
+        NSLog(@"Coming from StepUIViewController!");
     }
+    else if ([sourceViewController isKindOfClass:[FormViewController class]])
+    {
+        NSLog(@"Coming from FormViewController!");
+    }
+//    [self jumpToGameStart:self];
 }
+
+-(IBAction)jumpToGameStart:(id)sender
+{
+    // Now goto first screen of the game loop
+    [self performSegueWithIdentifier:@"segueToGameStartLoop" sender:self];
+    NSLog(@"Jump to First view of game");
+}
+
 
 #pragma mark - Private method implementation
 
@@ -101,7 +120,7 @@
     [picker setSubject:@"Export CSV de la base client"];
     
     // Set up recipients
-    NSArray *toRecipients = [NSArray arrayWithObject:@"contact@scotta.fr"];
+    NSArray *toRecipients = [NSArray arrayWithObject:@"contact@cbleu.re"];
     // NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
     // NSArray *bccRecipients = [NSArray arrayWithObject:@"fourth@example.com"];
     
@@ -120,7 +139,7 @@
     [picker addAttachmentData:fileData mimeType:@"text/csv" fileName:@"clientInfo.csv"];
     
     // Fill out the email body text
-    NSString *emailBody = @"Email d'export de l'application Nestle base Client Club";
+    NSString *emailBody = @"Email d'export de la base Client";
     [picker setMessageBody:emailBody isHTML:NO];
     
     [self presentViewController:picker animated:YES completion:nil];

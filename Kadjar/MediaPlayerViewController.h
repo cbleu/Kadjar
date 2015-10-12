@@ -13,4 +13,16 @@
 @interface MediaPlayerViewController : UIViewController
 
 
+
+
+@property (nonatomic, retain) AVPlayerViewController *avPlayerViewcontroller;
+
+@property (nonatomic, strong) NSString *qrCodeString;
+
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+
+
+
+-(void)itemDidFinishPlaying:(NSNotification *) notification;
+
 @end

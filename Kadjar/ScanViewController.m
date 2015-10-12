@@ -7,31 +7,8 @@
 //
 
 #import "ScanViewController.h"
+#import "MediaPlayerViewController.h"
 
-
-@interface ScanViewController ()
-
-@property (nonatomic, strong) AVCaptureSession *captureSession;
-@property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
-@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
-@property (nonatomic) BOOL isReading;
-@property (nonatomic) BOOL detectFlag;
-
-@property (nonatomic, strong) UIView *highlightView;
-
-
--(BOOL)startReading;
--(void)stopReading;
--(void)stopDetection;
-
--(void)loadBeepSound;
-
--(void)checkPrize;
--(void)initPrizeArray;
--(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold;
--(NSString*)getGameCodeFrom: (NSString*)scanCode;
-
-@end
 
 @implementation ScanViewController
 
@@ -45,20 +22,22 @@
     
     // Set the initial value of the flag to NO.
     _isReading = NO;
-    
-    _detectFlag = FALSE;
+    _detectFlag = NO;
     
     // Begin loading the sound effect so to have it ready for playback when it's needed.
     [self loadBeepSound];
     
+    // Prepare the green detection scan square
     _highlightView = [[UIView alloc] init];
     _highlightView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
     _highlightView.layer.borderColor = [UIColor greenColor].CGColor;
     _highlightView.layer.borderWidth = 3;
-    
-    [self initPrizeArray];
-    
+        
     [self startReading];
+    
+    //Start timer to stop scan
+    [self stopScanAfterDelay:10.0];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,27 +46,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:NO];
-//    [UIView setAnimationsEnabled:NO];
-//    
-//    // Stackoverflow #26357162 to force orientation
-//    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-//    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-//}
-//
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:NO];
-//    [UIView setAnimationsEnabled:YES];
-//}
-
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:[UIDevice currentDevice]];
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -98,51 +61,40 @@
 - (void)orientationChanged:(NSNotification *)notification
 {
     _iOSDevice = notification.object;
-    
-//    _videoPreviewLayer.connection.videoOrientation = [self interfaceOrientationToVideoOrientation];
-    
-    //or
-    
-//    [self setAutoVideoConnectionOrientation:YES];
-    
 }
 
-//-(BOOL)shouldAutorotate {
-//    return NO;
-//}
+-(BOOL)shouldAutorotate {
+    return NO;
+}
 
-//- (NSUInteger)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskPortrait;
-////    UIInterfaceOrientationMaskLandscapeLeft| UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortrait |UIInterfaceOrientationMaskPortraitUpsideDown;
-//    //or simply UIInterfaceOrientationMaskAll;
-//}
-
-#pragma mark - IBAction method implementation
-
-- (IBAction)startStopReading:(id)sender {
-    if (!_isReading) {
-        // This is the case where the app should read a QR code when the start button is tapped.
-        if ([self startReading]) {
-            // If the startReading methods returns YES and the capture session is successfully
-            // running, then change the start button title and the status message.
-            [_bbitemStart setTitle:@"Stop"];
-            [_lblStatus setText:@"Scanning for QR Code..."];
-        }
-    }
-    else{
-        // In this case the app is currently reading a QR code and it should stop doing so.
-        [self stopReading];
-        // The bar button item's title should change again.
-        [_bbitemStart setTitle:@"Start!"];
-    }
-    
-    // Set to the flag the exact opposite value of the one that currently has.
-    _isReading = !_isReading;
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//    UIInterfaceOrientationMaskLandscapeLeft| UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortrait |UIInterfaceOrientationMaskPortraitUpsideDown;
 }
 
 
 #pragma mark - Private method implementation
 
+
+-(void)loadBeepSound{
+    // Get the path to the beep.mp3 file and convert it to a NSURL object.
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
+    NSURL *beepURL = [NSURL URLWithString:beepFilePath];
+    
+    NSError *error;
+    
+    // Initialize the audio player object using the NSURL object previously set.
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
+    if (error) {
+        // If the audio player cannot be initialized then log a message.
+        NSLog(@"Could not play beep file.");
+        NSLog(@"%@", [error localizedDescription]);
+    }
+    else{
+        // If the audio player was successfully initialized then load it in memory.
+        [_audioPlayer prepareToPlay];
+    }
+}
 
 - (BOOL)startReading {
     NSError *error;
@@ -150,17 +102,22 @@
     // Patch: Anti bounce flag
     _detectFlag = FALSE;
     
-    // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
-    // as the media type parameter.
-    
-//    AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-
+    // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video as the media type parameter.
     AVCaptureDevice *captureDevice = nil;
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     for(AVCaptureDevice *camera in devices) {
-        if([camera position] == AVCaptureDevicePositionFront) { // is front camera
-            captureDevice = camera;
-            break;
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+            NSLog(@"IPAD");
+            if([camera position] == AVCaptureDevicePositionFront) { // is front camera
+                captureDevice = camera;
+                break;
+            }
+        }else{
+            NSLog(@"IPHONE");
+            if([camera position] == AVCaptureDevicePositionBack) { // is Back camera
+                captureDevice = camera;
+                break;
+            }
         }
     }
 
@@ -172,27 +129,6 @@
         NSLog(@"%@", [error localizedDescription]);
         return NO;
     }
-
-//    AVCaptureConnection *videoConnection = nil;
-//    
-//    for ( AVCaptureConnection *connection in [movieFileOutput connections] )
-//    {
-//        NSLog(@"%@", connection);
-//        for ( AVCaptureInputPort *port in [connection inputPorts] )
-//        {
-//            NSLog(@"%@", port);
-//            if ( [[port mediaType] isEqual:AVMediaTypeVideo] )
-//            {
-//                videoConnection = connection;
-//            }
-//        }
-//    }
-//
-//    if ([videoConnection isVideoOrientationSupported])
-//    {
-//        AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationLandscapeLeft;
-//        [videoConnection setVideoOrientation:orientation];
-//    }
 
     // Initialize the captureSession object.
     _captureSession = [[AVCaptureSession alloc] init];
@@ -208,21 +144,23 @@
     [captureMetadataOutput setMetadataObjectTypes:[NSArray arrayWithObject:AVMetadataObjectTypeQRCode]];
     
     // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
-    
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     
     [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
     [_videoPreviewLayer setFrame:_viewPreview.layer.bounds];
     [_viewPreview.layer addSublayer:_videoPreviewLayer];
     
-    //    // Get the device orientation
-    //    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-    //    _videoPreviewLayer.orientation = deviceOrientation;
-    
+    // Adjust the capture orientation
     AVCaptureConnection *videoConnection = _videoPreviewLayer.connection;
+
     if ([videoConnection isVideoOrientationSupported])
     {
-        [videoConnection setVideoOrientation:(AVCaptureVideoOrientation)[UIDevice currentDevice].orientation];
+        UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+            [videoConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
+        }else{
+            [videoConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
+        }
     }
 
     // Start video capture.
@@ -245,12 +183,18 @@
     
     // Remove the video preview layer from the viewPreview view's layer.
     [_videoPreviewLayer removeFromSuperlayer];
+    
+    _isReading = NO;
 }
 
 -(void)stopDetection
 {
+    _isReading = NO;
+    [self cancelTimedSegue];
+    
     // If the audio player is not nil, then play the sound effect.
     if (_audioPlayer) {
+        NSLog(@"Play beep file.");
         [_audioPlayer play];
     }
     
@@ -287,143 +231,47 @@
                 // Stop detection
                 [self performSelectorOnMainThread:@selector(stopReading) withObject:nil waitUntilDone:NO];
                 
-                [_bbitemStart performSelectorOnMainThread:@selector(setTitle:) withObject:@"Start!" waitUntilDone:NO];
-                
-                [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:_currentGameCode waitUntilDone:NO];
-                
                 [flashView removeFromSuperview];
                 [blackView removeFromSuperview];
-                
-                // DEBUG get the prize !
-                [self checkPrize];
 
                 // Close the scan View
-                [self dismissViewControllerAnimated:YES completion:nil];
-                [self performSegueWithIdentifier:@"show_transition" sender:self];
-//                dispatch_async(dispatch_get_main_queue(), {performSegueWithIdentifier(@"", self)});
-                
-//                dispatch_async(dispatch_get_main_queue(),{
-//                    self.performSegueWithIdentifier(mysegueIdentifier, self)
-//                });
+                [self performSegueWithIdentifier:@"segueFromScanToTransition" sender:self];
 
             }];
         }];
     }];
-    
     _isReading = NO;
-    
 }
 
--(void)initPrizeArray
+
+-(void)stopScanAfterDelay:(double)delay
 {
-    
-    NSMutableDictionary *lot01 =[NSMutableDictionary
-                                 dictionaryWithDictionary: @{
-                                                             @"name": @"Casquette",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    NSMutableDictionary *lot02 = [NSMutableDictionary
-                                  dictionaryWithDictionary:@{
-                                                             @"name": @"T-Shirt",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    NSMutableDictionary *lot03 = [NSMutableDictionary
-                                  dictionaryWithDictionary:@{
-                                                             @"name": @"Stylo",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    NSMutableDictionary *lot04 = [NSMutableDictionary
-                                  dictionaryWithDictionary:@{
-                                                             @"name": @"Porte-Clé",
-                                                             @"stock": [NSNumber numberWithInt:5]
-                                                             }];
-    _prizeArray = [NSMutableArray arrayWithObjects:
-                   lot01, lot02, lot03, lot04, nil];
-    
+    NSLog(@"Timer to abort waiting scan initalised to: %1.0f", delay);
+    [self performSelector:@selector(actionStopScanSegue:) withObject:self afterDelay:delay ];
     
 }
 
--(NSInteger)CheckPrizeWithThatPercentToWin:(int)winThreshold
+
+
+-(IBAction)actionStopScanSegue:(id)sender
 {
-    int looseLimit = 100 - winThreshold;
-    
-    // First: Do we win something ?
-    
-    int randomVal = (arc4random_uniform(100));
-    NSLog(@"random value: %d, Loose threshold:%d", randomVal, looseLimit);
-    if (randomVal < looseLimit){
-        // We loose ;-(
-        return -1;
-    }
-    
-    // Second: As we win something, ask what ?
-    
-    int prizeIndex = arc4random_uniform((u_int32_t)(_prizeArray.count));
-    
-    int num = [[_prizeArray[prizeIndex] objectForKey:@"stock"] intValue];
-    if (num <= 0){
-        NSLog(@"Stock épuisé pour %@ (%d)", _prizeArray[prizeIndex][@"name"], prizeIndex);
-        return -1;
-    }
-    NSNumber *newNum = [NSNumber numberWithInt:(num - 1)];
-    [_prizeArray[prizeIndex] setObject:newNum forKey:@"stock"];
-    
-    //    NSInteger stock = [_prizeArray[prizeIndex][@"stock"] integerValue];
-    //    [_prizeArray[prizeIndex] setObject:[NSNumber numberWithInt:stock--] forKey:@"stock"];
-    
-    NSLog(@"random index: %d", prizeIndex);
-    
-    return prizeIndex;
+    NSLog(@"StopScan now!");
+    [self performSegueWithIdentifier:@"abortScanSegue" sender:self];
 }
 
-
--(void)checkPrize
+-(void) cancelTimedSegue
 {
-    NSString *resultStr;
-    
-    // Check prize
-    NSInteger index = [self CheckPrizeWithThatPercentToWin:100];
-    
-    if (index >= 0){
-        
-        resultStr = [NSString stringWithFormat:@"Votre lot est: %@ stock: %@", _prizeArray[index][@"name"], _prizeArray[index][@"stock"]];
-        
-        NSLog(@"We Win something: %@ !", resultStr);
-    }else{
-        resultStr = [NSString stringWithFormat:@"Désolé vous n'avez pas gagné cette fois !"];
-        NSLog(@"We Loose: %@", resultStr);
-    }
-    
-    // Display Prize
-//    [_lblTitle performSelectorOnMainThread:@selector(setText:) withObject:resultStr waitUntilDone:NO];
-    
+    [[self class] cancelPreviousPerformRequestsWithTarget:self];
+    NSLog(@"Timed Segue canceled !!!");
 }
 
--(void)loadBeepSound{
-    // Get the path to the beep.mp3 file and convert it to a NSURL object.
-    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
-    NSURL *beepURL = [NSURL URLWithString:beepFilePath];
-    
-    NSError *error;
-    
-    // Initialize the audio player object using the NSURL object previously set.
-    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
-    if (error) {
-        // If the audio player cannot be initialized then log a message.
-        NSLog(@"Could not play beep file.");
-        NSLog(@"%@", [error localizedDescription]);
-    }
-    else{
-        // If the audio player was successfully initialized then load it in memory.
-        [_audioPlayer prepareToPlay];
-    }
-}
+#pragma mark - navigation
 
--(NSString*)getGameCodeFrom: (NSString*)scanCode
-{
-    NSString *code = [[scanCode componentsSeparatedByString:@"#"] lastObject];
-    
-    return code;
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"segueFromScanToTransition"]) {
+        MediaPlayerViewController *destViewController = segue.destinationViewController;
+        destViewController.qrCodeString = self.qrCodeString;
+    }
 }
 
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate method implementation
@@ -432,7 +280,6 @@
     
     CGRect highlightViewRect = CGRectZero;
     AVMetadataMachineReadableCodeObject *barCodeObject;
-    NSString *detectionString = nil;
     
     // Check if the metadataObjects array is not nil and it contains at least one object.
     if (metadataObjects != nil && [metadataObjects count] > 0) {
@@ -448,12 +295,10 @@
                 highlightViewRect = barCodeObject.bounds;
                 _highlightView.frame = CGRectOffset(highlightViewRect, _viewPreview.frame.origin.x, _viewPreview.frame.origin.y);
                 
-                detectionString = [(AVMetadataMachineReadableCodeObject *)metadata stringValue];
+                self.qrCodeString = [(AVMetadataMachineReadableCodeObject *)metadata stringValue];
                 
-                [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:detectionString waitUntilDone:NO];
-                
-                _currentGameCode = [self getGameCodeFrom: detectionString];
-                
+//                [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:_qrCodeString waitUntilDone:NO];
+
                 if(!_detectFlag){
                     _detectFlag = true;
                     [self performSelector:@selector(stopDetection) withObject:self afterDelay:0.2 ];
@@ -462,11 +307,9 @@
             break;
         }
     }else{
-        _highlightView.frame = CGRectOffset(highlightViewRect, 2000, 2000);
+        _highlightView.frame = CGRectOffset(highlightViewRect, 2000, 2000); // en dehors de l'ecran
     }
-    
-    
-    
+
 }
 
 @end

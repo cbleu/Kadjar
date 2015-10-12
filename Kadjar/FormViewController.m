@@ -7,21 +7,22 @@
 //
 
 #import "FormViewController.h"
-#import "DBManager.h"
 
 @interface FormViewController ()
 
-@property (nonatomic, strong) DBManager *dbManager;
 
 @end
 
 
 @implementation FormViewController
-@synthesize switchClub;
+//@synthesize switchClub;
 @synthesize buttonSend;
 @synthesize txtFirstname;
 @synthesize txtLastname;
 @synthesize txtEmail;
+@synthesize txtGSM;
+@synthesize gameCode;
+@synthesize newCode;
 
 
 - (void)viewDidLoad
@@ -32,11 +33,23 @@
 	// Make self the delegate of the textfields.
 	self.txtFirstname.delegate = self;
 	self.txtLastname.delegate = self;
-	self.txtEmail.delegate = self;
+    self.txtEmail.delegate = self;
+    self.txtGSM.delegate = self;
+    
+    _isFormOk = NO;
 	
 	// Initialize the dbManager object.
 	self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"clientInfoDB.sql"];
+    
+//    _currentPlayer = [[DBRecordClient alloc] init];
+    
+    self.txtFirstname.text = _currentPlayer.nom;
+    self.txtLastname.text = _currentPlayer.prenom;
+    self.txtEmail.text = _currentPlayer.email;
+    self.txtGSM.text = _currentPlayer.gsm;
+    
 	
+    [self registerForKeyboardNotifications];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,14 +65,18 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
 
 	if([self.txtFirstname.text isEqualToString:@""] || [self.txtLastname.text isEqualToString:@""] || [self.txtEmail.text isEqualToString:@""]) {
-		self.switchClub.enabled = false;
+//		self.switchClub.enabled = false;
+        _isFormOk = NO;
 	}else{
-		self.switchClub.enabled = true;
+//		self.switchClub.enabled = true;
+        _isFormOk = YES;
 	}
 	if (textField ==txtFirstname) {
 		[txtLastname becomeFirstResponder];
-	}else if ( textField == txtLastname){
-		[txtEmail becomeFirstResponder];
+    }else if ( textField == txtLastname){
+        [txtEmail becomeFirstResponder];
+    }else if ( textField == txtEmail){
+        [txtGSM becomeFirstResponder];
 	}else{
 		[textField resignFirstResponder];
 	}
@@ -88,8 +105,10 @@
 		} else {
 			unacceptedInput = [[NSCharacterSet characterSetWithCharactersInString:[ALPHA_NUMERIC stringByAppendingString:@".-_~@"]] invertedSet];
 		}
-	} else if (textField == self.txtFirstname || textField == self.txtLastname) {
-		unacceptedInput = [[NSCharacterSet characterSetWithCharactersInString:[ALPHA stringByAppendingString:FRENCH]] invertedSet];
+    } else if (textField == self.txtFirstname || textField == self.txtLastname) {
+        unacceptedInput = [[NSCharacterSet characterSetWithCharactersInString:[ALPHA stringByAppendingString:FRENCH @" "]] invertedSet];
+    } else if (textField == self.txtGSM) {
+        unacceptedInput = [[NSCharacterSet characterSetWithCharactersInString:[NUMERIC stringByAppendingString:@".-()+ "]] invertedSet];
 	} else {
 		unacceptedInput = [[NSCharacterSet illegalCharacterSet] invertedSet];
 	}
@@ -105,7 +124,11 @@
 	
 	// Prepare the query string.
 	NSString *query;
-	query = [NSString stringWithFormat:@"insert into clientInfo values(null, '%@', '%@', '%@')", self.txtFirstname.text, self.txtLastname.text, self.txtEmail.text];
+    if(self.newCode){
+        query = [NSString stringWithFormat:@"insert into clientInfo values(null, '%@', '%@', '%@', '%@', '%@', '%@')", self.txtFirstname.text, self.txtLastname.text, self.txtEmail.text, self.txtGSM.text, self.gameCode, self.prizeWinned];
+    }else{
+        query = [NSString stringWithFormat:@"update clientInfo Set firstname = '%@', lastname = '%@', email = '%@', gsm = '%@' where clientInfoID = %d", self.txtFirstname.text, self.txtLastname.text, self.txtEmail.text, self.txtGSM.text, self.currentPlayer.clientInfoID];
+    }
 	
 	// Execute the query.
 	[self.dbManager executeQuery:query];
@@ -123,16 +146,76 @@
 }
 
 
--(IBAction) switchPressedAction:(id)sender {
+//-(IBAction) switchPressedAction:(id)sender {
+//
+////    NSLog(@"switchClub:%d", switchClub.on);
+//    if(switchClub.on){
+//		self.buttonSend.enabled = YES;
+//    }else{
+//		self.buttonSend.enabled = NO;
+//	}
+//}
 
-//    NSLog(@"switchClub:%d", switchClub.on);
-    if(switchClub.on){
-		self.buttonSend.enabled = YES;
-    }else{
-		self.buttonSend.enabled = NO;
-	}
+
+- (IBAction) NoButtonPress:(id)sender
+{
+    [self saveInfo:self];
+
+    [self performSegueWithIdentifier:@"unwindToGameStartFromFormSegue" sender:self];
+
 }
+
+
 
 #pragma mark - Private method implementation
 
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    _scrollView.contentInset = contentInsets;
+    _scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, _activeField.frame.origin) ) {
+        [self.scrollView scrollRectToVisible:_activeField.frame animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    _scrollView.contentInset = contentInsets;
+    _scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    _activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    _activeField = nil;
+}
 @end
